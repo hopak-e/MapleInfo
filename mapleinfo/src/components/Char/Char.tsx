@@ -4,7 +4,7 @@ import { CharBasicData } from "../../types/char";
 import CharImage from "./CharImage";
 import CharBasic from "./CharBasic";
 import CharStat from "./CharStat";
-import CharEquipment from "./CharEquipment";
+import CharEquipment from "./CharEquipment/CharEquipment";
 
 interface CharProps {
   value: string | undefined;
@@ -40,9 +40,9 @@ const Char = ({ value }: CharProps) => {
   }, [value]);
 
   return (
-    <div className="grow w-full max-w-[1200px] mx-auto space-y-3 shrink-0 p-3">
+    <div className="grow w-full max-w-[1200px] mx-auto  space-y-3 shrink-0 p-3">
       {charBasicData && (
-        <div className="grid grid-cols-1 w-full md:grid-cols-[250px_1fr]">
+        <div className="grid grid-cols-1 gap-3 w-full md:grid-cols-[250px_1fr]">
           <div className="grow-0 shrink-0 basis-[250px] space-y-3 ">
             <div className="bg-dark-200 text-white rounded-sm shadow-sm">
               <div className="flex w-full items-center justify-center flex-wrap pt-5 gap-x-2 sm:gap-x-8 md:gap-x-0">
@@ -61,7 +61,7 @@ const Char = ({ value }: CharProps) => {
             </div>
           </div>
           <div className="grow shrink space-y-3">
-            <CharEquipment />
+            <CharEquipment ocid={ocid} />
           </div>
         </div>
       )}

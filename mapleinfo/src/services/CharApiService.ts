@@ -1,5 +1,11 @@
 import axios, { AxiosResponse } from "axios";
-import { CharBasicData, CharStatData, HyperStat, Ability } from "../types/char";
+import {
+  CharBasicData,
+  CharStatData,
+  HyperStat,
+  Ability,
+  Equipment,
+} from "../types/char";
 
 const apiInstance = axios.create({
   baseURL: "https://open.api.nexon.com/maplestory/v1",
@@ -108,6 +114,18 @@ const CharApiService = {
       return res.data;
     } catch (error) {
       console.error("Error fetching ability data:", error);
+      throw error;
+    }
+  },
+
+  fetchEquipment: async (ocid: string): Promise<Equipment> => {
+    try {
+      const res = await apiInstance.get(
+        `character/item-equipment?ocid=${ocid}`
+      );
+      return res.data;
+    } catch (error) {
+      console.error("Error fetching equipment data:", error);
       throw error;
     }
   },

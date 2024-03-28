@@ -128,6 +128,7 @@ const CharStat = ({ stat, ocid }: StatProps) => {
         <div className="flex py-2 gap-x-2">
           {[1, 2, 3].map((num) => (
             <PresetButton
+              key={num}
               num={num}
               onClick={() => handlePresetButtonClick(num)}
               isSelected={Number(hyperStatPreset) === num}
@@ -149,6 +150,7 @@ const CharStat = ({ stat, ocid }: StatProps) => {
         <div className="flex py-2 gap-x-2">
           {[1, 2, 3].map((num) => (
             <PresetButton
+              key={num}
               num={num}
               onClick={() => handleAbilityButtonClick(num)}
               isSelected={Number(abilityPreset) === num}
