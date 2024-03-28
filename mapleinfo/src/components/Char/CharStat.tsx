@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { CharStatData, HyperStat } from "../../types/char";
+import { CharStatData, AbilityPreset, HyperStatPreset } from "../../types/char";
 import PresetButton from "../bottons/PresetButton";
 import CharApiService from "../../services/CharApiService";
 
@@ -26,23 +26,60 @@ const StatItem = ({ stat, index }: Props) => {
 };
 
 const CharStat = ({ stat, ocid }: StatProps) => {
-  const [hyperStat, setHyperStat] = useState<HyperStat | undefined>();
-  const [hyperStatPreset, setHyperStatPreset] = useState("");
+  const [hyperStat, setHyperStat] = useState<HyperStatPreset[][]>([]);
+  const [hyperStatPreset, setHyperStatPreset] = useState<string>("");
+  const [ability, setAbility] = useState<AbilityPreset[]>([]);
+  const [abilityPreset, setAbilityPreset] = useState<number>();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const hyperStatData = await CharApiService.fetchHyperStat(ocid);
-        setHyperStat(hyperStatData);
+        const [hyperStatData, abilityData] = await Promise.all([
+          CharApiService.fetchHyperStat(ocid),
+          CharApiService.fetchAbility(ocid),
+        ]);
+
+        const hyperStatArr = [
+          hyperStatData.hyper_stat_preset_1,
+          hyperStatData.hyper_stat_preset_2,
+          hyperStatData.hyper_stat_preset_3,
+        ];
+        setHyperStat(hyperStatArr);
         setHyperStatPreset(hyperStatData.use_preset_no);
+
+        const abilityArr = [
+          abilityData.ability_preset_1,
+          abilityData.ability_preset_2,
+          abilityData.ability_preset_3,
+        ];
+        setAbility(abilityArr);
+        setAbilityPreset(abilityData.preset_no);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchData();
   }, [ocid]);
-  console.log(hyperStat);
-  console.log(hyperStatPreset);
+
+  const handlePresetButtonClick = (num: number) => {
+    setHyperStatPreset(num.toString());
+  };
+
+  const handleAbilityButtonClick = (num: number) => {
+    setAbilityPreset(num);
+  };
+
+  const selectedHyperStatPreset = hyperStat[Number(hyperStatPreset) - 1] || [];
+  const filteredSelectedHyperStatPreset = selectedHyperStatPreset.filter(
+    (item) => item.stat_level !== 0
+  );
+
+  const selectedAbilityPreset =
+    ability.length > 0 && ability[Number(abilityPreset) - 1]?.ability_info;
+
+  const renderStatItems = (indexes: number[]) =>
+    indexes.map((index) => <StatItem key={index} stat={stat} index={index} />);
+
   return (
     <div className="flex flex-wrap text-sm gay-y-3 gap-x-2">
       <div className="basis-full sm:basis-1/2 md:basis-full max-w-[280px] mx-auto">
@@ -53,19 +90,13 @@ const CharStat = ({ stat, ocid }: StatProps) => {
             <span>스탯 공격력</span>
             <span>{stat[1].stat_value}</span>
           </div>
-          <StatItem stat={stat} index={2} />
-          <StatItem stat={stat} index={4} />
-          <StatItem stat={stat} index={3} />
-          <StatItem stat={stat} index={32} />
+          {renderStatItems([2, 4, 3, 32])}
         </div>
         <div className="space-y-0.5 py-2 border-b">
-          <StatItem stat={stat} index={6} />
-          <StatItem stat={stat} index={7} />
+          {renderStatItems([6, 7])}
         </div>
         <div className="space-y-0.5 py-2 border-b">
-          <StatItem stat={stat} index={36} />
-          <StatItem stat={stat} index={37} />
-          <StatItem stat={stat} index={8} />
+          {renderStatItems([36, 37, 8])}
         </div>
         <div className="space-y-0.5 py-2 border-b">
           <StatItem stat={stat} index={30} />
@@ -78,19 +109,10 @@ const CharStat = ({ stat, ocid }: StatProps) => {
           <StatItem stat={stat} index={35} />
         </div>
         <div className="space-y-0.5 py-2 border-b">
-          <StatItem stat={stat} index={40} />
-          <StatItem stat={stat} index={41} />
-          <StatItem stat={stat} index={20} />
-          <StatItem stat={stat} index={21} />
-          <StatItem stat={stat} index={16} />
-          <StatItem stat={stat} index={17} />
-          <StatItem stat={stat} index={18} />
-          <StatItem stat={stat} index={19} />
+          {renderStatItems([40, 41, 20, 21, 16, 17, 18, 19])}
         </div>
         <div className="space-y-0.5 py-2 border-b">
-          <StatItem stat={stat} index={13} />
-          <StatItem stat={stat} index={14} />
-          <StatItem stat={stat} index={15} />
+          {renderStatItems([13, 14, 15])}
         </div>
         <div className="space-y-0.5 py-2 border-b">
           <div className="flex items-center justify-between px-1 rounded-sm">
@@ -104,10 +126,56 @@ const CharStat = ({ stat, ocid }: StatProps) => {
         </div>
         <div className="font-[800] px-1 mt-6 text-lg">하이퍼 스탯</div>
         <div className="flex py-2 gap-x-2">
-          <PresetButton num={1} />
-          <PresetButton num={2} />
-          <PresetButton num={3} />
+          {[1, 2, 3].map((num) => (
+            <PresetButton
+              num={num}
+              onClick={() => handlePresetButtonClick(num)}
+              isSelected={Number(hyperStatPreset) === num}
+            />
+          ))}
         </div>
+        <ul className="flex flex-col gap-y-1 text-xs">
+          {filteredSelectedHyperStatPreset &&
+            filteredSelectedHyperStatPreset.map((item, key) => (
+              <li key={item.stat_type} className="flex items-center gap-x-2">
+                <span className="text-center bg-dark-150 p-1 w-9 rounded-md">
+                  Lv.{item.stat_level}
+                </span>
+                <span>{item.stat_increase}</span>
+              </li>
+            ))}
+        </ul>
+        <div className="font-[800] px-1 mt-6 text-lg">어빌리티</div>
+        <div className="flex py-2 gap-x-2">
+          {[1, 2, 3].map((num) => (
+            <PresetButton
+              num={num}
+              onClick={() => handleAbilityButtonClick(num)}
+              isSelected={Number(abilityPreset) === num}
+            />
+          ))}
+        </div>
+        <ul className="flex flex-col w-full gap-y-1 text-[10px]">
+          {selectedAbilityPreset &&
+            selectedAbilityPreset.map((item, key) => (
+              <li
+                key={item.ability_no}
+                className="flex w-full items-center gap-x-2"
+              >
+                <span
+                  className={`text-center font-[600] ${
+                    item.ability_grade === "레전드리"
+                      ? "bg-ability-50"
+                      : item.ability_grade === "유니크"
+                      ? "bg-ability-100"
+                      : "bg-ability-150"
+                  } p-[2px] w-full rounded-md`}
+                >
+                  {item.ability_value}
+                </span>
+              </li>
+            ))}
+        </ul>
       </div>
     </div>
   );

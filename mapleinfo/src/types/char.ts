@@ -23,7 +23,7 @@ export interface CharBasicData {
 
 export interface HyperStatPreset {
   stat_type: string;
-  stat_poinet: number;
+  stat_point: number;
   stat_level: number;
   stat_increase: string;
 }
@@ -33,4 +33,17 @@ export interface HyperStat {
   hyper_stat_preset_1: HyperStatPreset[];
   hyper_stat_preset_2: HyperStatPreset[];
   hyper_stat_preset_3: HyperStatPreset[];
+}
+
+export interface AbilityPreset {
+  ability_info: [
+    { ability_no: string; ability_grade: string; ability_value: string }
+  ];
+}
+
+export interface Ability {
+  preset_no: number;
+  ability_preset_1: AbilityPreset;
+  ability_preset_2: AbilityPreset;
+  ability_preset_3: AbilityPreset;
 }

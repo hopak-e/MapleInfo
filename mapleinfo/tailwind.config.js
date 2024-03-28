@@ -12,6 +12,7 @@ module.exports = {
           200: "#292E36",
           250: "#171B20",
         },
+        ability: { 50: "#A4C701", 100: "#E89B0B", 150: "#8066D2" },
       },
       backgroundImage: {
         wallpaper: "url('./assets/wallpaper.svg')",

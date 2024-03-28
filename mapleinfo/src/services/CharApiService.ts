@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { CharBasicData, CharStatData, HyperStat } from "../types/char";
+import { CharBasicData, CharStatData, HyperStat, Ability } from "../types/char";
 
 const apiInstance = axios.create({
   baseURL: "https://open.api.nexon.com/maplestory/v1",
@@ -87,7 +87,7 @@ const CharApiService = {
         await apiInstance.get(`/guild/basic?oguild_id=${oguilId}`);
       return res.data.guild_mark_custom;
     } catch (error) {
-      console.error("Error fetching guild data:", error);
+      console.error("Error fetching guildImgUrl data:", error);
       throw error;
     }
   },
@@ -97,7 +97,17 @@ const CharApiService = {
       const res = await apiInstance.get(`/character/hyper-stat?ocid=${ocid}`);
       return res.data;
     } catch (error) {
-      console.error("Error fetching guild data:", error);
+      console.error("Error fetching hyperStat data:", error);
+      throw error;
+    }
+  },
+
+  fetchAbility: async (ocid: string): Promise<Ability> => {
+    try {
+      const res = await apiInstance.get(`/character/ability?ocid=${ocid}`);
+      return res.data;
+    } catch (error) {
+      console.error("Error fetching ability data:", error);
       throw error;
     }
   },
