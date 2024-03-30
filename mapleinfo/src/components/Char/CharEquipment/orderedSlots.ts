@@ -1,4 +1,6 @@
-export const orderedSlots = [
+import { ItemOption } from "../../../types/char";
+
+export const orderedListSlots = [
   "무기",
   "보조무기",
   "엠블렘",
@@ -23,4 +25,57 @@ export const orderedSlots = [
   "포켓 아이템",
   "뱃지",
   "훈장",
+  "안드로이드",
+  "칭호",
 ];
+
+export const orderedInventorySlots = [
+  "반지4",
+  "",
+  "모자",
+  "",
+  "엠블렘",
+  "반지3",
+  "펜던트",
+  "얼굴장식",
+  "",
+  "뱃지",
+  "반지2",
+  "펜던트2",
+  "눈장식",
+  "귀고리",
+  "훈장",
+  "반지1",
+  "무기",
+  "상의",
+  "견장",
+  "보조무기",
+  "포켓 아이템",
+  "벨트",
+  "하의",
+  "장갑",
+  "망토",
+  "칭호",
+  "",
+  "신발",
+  "안드로이드",
+  "기계 심장",
+];
+
+export const orderedItemOption: ItemOption = {
+  str: "0",
+  dex: "0",
+  int: "0",
+  luk: "0",
+  max_hp: "0",
+  max_mp: "0",
+  attack_power: "0",
+  magic_power: "0",
+  armor: "0",
+  speed: "0",
+  jump: "0",
+  boss_damage: "0",
+  ignore_monster_armor: "0",
+  all_stat: "0",
+  damage: "0",
+};
