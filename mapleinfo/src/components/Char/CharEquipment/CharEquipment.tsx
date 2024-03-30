@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import CharApiService from "../../../services/CharApiService";
-import { Equipment, EquipmentPreset } from "../../../types/char";
+import { EquipmentPreset } from "../../../types/char";
 import PresetButton from "../../bottons/PresetButton";
-import { orderedSlots } from "./orderedSlots";
-import { replacementMap } from "./replacementMap";
+import CharEquipmentList from "./CharEquipmentList";
+import Inventory from "./Inventory";
 
 interface CharEquipmentProps {
   ocid: string;
@@ -11,21 +11,54 @@ interface CharEquipmentProps {
 
 const CharEquipment = ({ ocid }: CharEquipmentProps) => {
   const [equipment, setEquipment] = useState<EquipmentPreset[][]>([]);
-  const [equipmentPreset, setEquipmentPreset] = useState<number>();
+  const [equipmentPreset, setEquipmentPreset] = useState<number | undefined>();
   const [listUpType, setListUpType] = useState<string>("목록");
-
+  const [selectedPresetEquipment, setSelectedPressetEquipment] = useState<
+    EquipmentPreset[] | undefined
+  >(undefined);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const equipmentData: Equipment = await CharApiService.fetchEquipment(
-          ocid
-        );
+        const [equipmentData, androidData] = await Promise.all([
+          CharApiService.fetchEquipment(ocid),
+          CharApiService.fetchAndroid(ocid),
+        ]);
+
         const equipmetnArr = [
           equipmentData.item_equipment_preset_1,
           equipmentData.item_equipment_preset_2,
           equipmentData.item_equipment_preset_3,
         ];
-        setEquipment(equipmetnArr);
+
+        const android: EquipmentPreset = {
+          item_name: androidData.android_name,
+          item_icon: androidData.android_icon,
+          item_description: androidData.android_description,
+          item_equipment_slot: "안드로이드",
+          item_equipment_part: "안드로이드",
+        };
+
+        const title: EquipmentPreset = {
+          item_name: equipmentData.title?.title_name,
+          item_icon: equipmentData.title?.title_icon,
+          item_description: equipmentData.title?.title_description,
+          date_option_expire: equipmentData.title?.date_option_expire,
+          item_equipment_slot: "칭호",
+          item_equipment_part: "칭호",
+        };
+
+        const mappedArr = equipmetnArr.map((presetArr) => {
+          const presets = [...presetArr];
+          if (androidData.android_name !== null) {
+            presets.push(android);
+          }
+          if (equipmentData.title !== null) {
+            presets.push(title);
+          }
+          return presets;
+        });
+
+        setEquipment(mappedArr);
         setEquipmentPreset(equipmentData.preset_no);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -41,26 +74,10 @@ const CharEquipment = ({ ocid }: CharEquipmentProps) => {
     setListUpType(listType);
   };
 
-  const selectedPresetEquipment =
-    equipmentPreset && equipment[equipmentPreset - 1];
-
-  //칭호 안드로이드도 넣어야됨
-  //반지 레벨 이미지
-
-  const orderedEquipment =
-    selectedPresetEquipment &&
-    orderedSlots.map((slot) =>
-      selectedPresetEquipment.find((item) => item?.item_equipment_slot === slot)
-    );
-
-  const replaceStat = (stat: string | undefined) => {
-    let replacedStat = stat;
-    Object.keys(replacementMap).forEach((key) => {
-      replacedStat = replacedStat?.replace(key, replacementMap[key]);
-    });
-    replacedStat = replacedStat?.replace(/ : /g, " ");
-    return replacedStat;
-  };
+  useEffect(() => {
+    equipmentPreset &&
+      setSelectedPressetEquipment(equipment[equipmentPreset - 1]);
+  }, [equipment, equipmentPreset]);
 
   return (
     <div className="grow shrink space-y-3">
@@ -95,82 +112,13 @@ const CharEquipment = ({ ocid }: CharEquipmentProps) => {
             </button>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-3 whitespace-nowrap">
-          {orderedEquipment &&
-            orderedEquipment.map((item, key) => (
-              <div
-                className="text-sm py-1 cursor-pointer bg-dark-150 "
-                key={key}
-              >
-                <div className="flex h-full items-center gap-x-1">
-                  <div className="flex flex-col justify-center items-center basis-[44px] min-h-[40px] shrink-0">
-                    <img src={item?.item_icon} alt={item?.item_name} />
-                  </div>
-                  <div className="flex flex-col overflow-hidden">
-                    <div className="inline-flex gap-x-0.5 text-xs"></div>
-                    <div className="font-semibold">
-                      <span>
-                        {item?.special_ring_level
-                          ? `${item?.item_name} Lv${item.special_ring_level}`
-                          : item?.item_name}
-                      </span>
-                    </div>
-                    <div className="text-[12px] space-y-0.5">
-                      <div>
-                        {item?.potential_option_1 && (
-                          <span className="pr-1">잠재</span>
-                        )}
-                        <span>
-                          {item?.potential_option_1
-                            ? `${replaceStat(item?.potential_option_1)}, `
-                            : ""}
-                        </span>
-                        <span>
-                          {item?.potential_option_2
-                            ? `${replaceStat(item?.potential_option_2)}, `
-                            : ""}
-                        </span>
-                        <span>
-                          {item?.potential_option_3
-                            ? `${replaceStat(item?.potential_option_3)}`
-                            : ""}
-                        </span>
-                      </div>
-                      <div>
-                        {item?.additional_potential_option_1 && (
-                          <span className="pr-1">에디</span>
-                        )}
-                        <span>
-                          {item?.additional_potential_option_1
-                            ? `${replaceStat(
-                                item?.additional_potential_option_1
-                              )}, `
-                            : ""}
-                        </span>
-                        <span>
-                          {item?.additional_potential_option_2
-                            ? `${replaceStat(
-                                item?.additional_potential_option_2
-                              )}, `
-                            : " "}
-                        </span>
-                        <span>
-                          {replaceStat(item?.additional_potential_option_3)}
-                        </span>
-                      </div>
-                      {item?.soul_option && (
-                        <div>
-                          <span className="pr-1"> 소울</span>
-                          <span>{replaceStat(item.soul_option)}</span>
-                        </div>
-                      )}
-                      <div></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-        </div>
+        {listUpType === "목록" ? (
+          <CharEquipmentList
+            selectedPresetEquipment={selectedPresetEquipment}
+          />
+        ) : (
+          <Inventory selectedPresetEquipment={selectedPresetEquipment} />
+        )}
       </div>
     </div>
   );
