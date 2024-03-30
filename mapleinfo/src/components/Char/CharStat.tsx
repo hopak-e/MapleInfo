@@ -14,9 +14,12 @@ interface StatProps {
 }
 
 const StatItem = ({ stat, index }: Props) => {
-  const formattedValue = stat[index].stat_value.includes(".")
-    ? `${Number(stat[index].stat_value).toLocaleString()}%`
-    : Number(stat[index].stat_value).toLocaleString();
+  const formattedValue =
+    stat[index].stat_value === null
+      ? null
+      : stat[index].stat_value.includes(".")
+      ? `${Number(stat[index].stat_value).toLocaleString()}%`
+      : Number(stat[index].stat_value).toLocaleString();
   return (
     <div className="flex items-center justify-between px-1 rounded-sm">
       <span>{stat[index].stat_name}</span>
@@ -167,10 +170,10 @@ const CharStat = ({ stat, ocid }: StatProps) => {
                 <span
                   className={`text-center font-[600] ${
                     item.ability_grade === "레전드리"
-                      ? "bg-ability-50"
+                      ? "bg-grade-50"
                       : item.ability_grade === "유니크"
-                      ? "bg-ability-100"
-                      : "bg-ability-150"
+                      ? "bg-grade-100"
+                      : "bg-grade-150"
                   } p-[2px] w-full rounded-md`}
                 >
                   {item.ability_value}
