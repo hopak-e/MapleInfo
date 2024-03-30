@@ -25,13 +25,16 @@ const Char = ({ value }: CharProps) => {
         const basicData: CharBasicData =
           await CharApiService.fetchBasicCharacterData(ocid);
         setCharBasicData(basicData);
-        const oguildId: string = await CharApiService.fetchGuildId(
-          basicData.character_guild_name,
-          basicData.world_name
-        );
-        const guildImgUrl: string | undefined =
-          await CharApiService.fetchGuildImgUrl(oguildId);
-        setGuildImgUrl(guildImgUrl);
+
+        if (basicData.character_guild_name !== null) {
+          const oguildId: string = await CharApiService.fetchGuildId(
+            basicData.character_guild_name,
+            basicData.world_name
+          );
+          const guildImgUrl: string | undefined =
+            await CharApiService.fetchGuildImgUrl(oguildId);
+          setGuildImgUrl(guildImgUrl);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
