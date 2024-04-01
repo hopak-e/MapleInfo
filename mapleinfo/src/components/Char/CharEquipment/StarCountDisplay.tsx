@@ -1,12 +1,27 @@
 import Star from "../../../assets/star.svg";
 import GrayStar from "../../../assets/graystar.svg";
+import BlueStar from "../../../assets/bluestar.svg";
 
 interface Props {
   starforce: string | undefined;
+  equipLevel: number;
+  scrollFlag: string;
 }
 
-const StarCountDisplay = ({ starforce }: Props) => {
-  const totalStars = 25;
+const StarCountDisplay = ({ starforce, equipLevel, scrollFlag }: Props) => {
+  const totalStars =
+    equipLevel &&
+    (equipLevel >= 138
+      ? 25
+      : equipLevel >= 128
+      ? 20
+      : equipLevel >= 118
+      ? 15
+      : equipLevel >= 108
+      ? 10
+      : equipLevel >= 95
+      ? 8
+      : 5);
   const starforceNumber = Number(starforce);
 
   const stars = [];
@@ -16,9 +31,9 @@ const StarCountDisplay = ({ starforce }: Props) => {
       stars.push(
         <img
           key={i}
-          src={Star}
+          src={scrollFlag === "사용" ? BlueStar : Star}
           alt="Star"
-          className={`inline-block w-3 h-3 ${
+          className={`inline-block w-[11px] h-[11px] ${
             i !== totalStars - 1 && "pr-[1px]"
           }`}
         />
@@ -29,7 +44,7 @@ const StarCountDisplay = ({ starforce }: Props) => {
           key={i}
           src={GrayStar}
           alt="GrayStar"
-          className={`inline-block w-3 h-3 ${
+          className={`inline-block w-[11px] h-[11px] ${
             i !== totalStars - 1 && "pr-[1px]"
           }`}
         />

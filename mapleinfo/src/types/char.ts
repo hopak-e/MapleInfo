@@ -361,3 +361,18 @@ export interface ItemOption {
   all_stat?: string;
   damage?: string;
 }
+
+export interface Matrix {
+  date: string;
+  character_class: string;
+  character_skill_grade: string;
+  character_skill: Skill[];
+}
+
+export interface Skill {
+  skill_name: string;
+  skill_description: string;
+  skill_level: number;
+  skill_effect: string;
+  skill_icon: string;
+}

@@ -6,13 +6,6 @@ interface CharBasicDataProps {
 }
 
 const CharBasic = ({ charBasicData, guildImgUrl }: CharBasicDataProps) => {
-  const powerValue =
-    charBasicData &&
-    charBasicData.final_stat[42].stat_value.replace(
-      /\B(?=(\d{3})+(?!\d))/g,
-      ","
-    );
-
   return (
     <div className="space-y-1 text-sm ">
       <div className="text-2xl font-[700] text-center mt-2">
@@ -28,7 +21,7 @@ const CharBasic = ({ charBasicData, guildImgUrl }: CharBasicDataProps) => {
           <span>{charBasicData.world_name}</span>
         </div>
         <div className="flex px-2 py-1 rounded-xl ml-2 bg-dark-250 items-center">
-          {guildImgUrl && (
+          {guildImgUrl !== undefined && (
             <img
               src={`data:image/png;base64,${guildImgUrl}`}
               alt="길드마크"
@@ -60,7 +53,9 @@ const CharBasic = ({ charBasicData, guildImgUrl }: CharBasicDataProps) => {
         <div className="flex">
           <div className="flex mt-3 pb-2 flex-col">
             <div className="flex font-[600] justify-center">전투력</div>
-            <div className="flex font-[900] text-xl">{powerValue}</div>
+            <div className="flex font-[900] text-xl">
+              {Number(charBasicData.final_stat[42].stat_value).toLocaleString()}
+            </div>
           </div>
         </div>
       </div>

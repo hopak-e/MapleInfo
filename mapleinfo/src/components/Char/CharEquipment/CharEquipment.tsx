@@ -3,13 +3,14 @@ import CharApiService from "../../../services/CharApiService";
 import { EquipmentPreset } from "../../../types/char";
 import PresetButton from "../../bottons/PresetButton";
 import CharEquipmentList from "./CharEquipmentList";
-import Inventory from "./Inventory";
+import CharInventory from "./CharInventory";
 
 interface CharEquipmentProps {
   ocid: string;
+  charClass: string;
 }
 
-const CharEquipment = ({ ocid }: CharEquipmentProps) => {
+const CharEquipment = ({ ocid, charClass }: CharEquipmentProps) => {
   const [equipment, setEquipment] = useState<EquipmentPreset[][]>([]);
   const [equipmentPreset, setEquipmentPreset] = useState<number | undefined>();
   const [listUpType, setListUpType] = useState<string>("목록");
@@ -82,7 +83,7 @@ const CharEquipment = ({ ocid }: CharEquipmentProps) => {
   return (
     <div className="grow shrink space-y-3">
       <div className="w-full rounded-sm bg-dark-200 p-2">
-        <div className="flex justify-between w-full pt-1 pb-3  ">
+        <div className="flex justify-between w-full pt-1 pb-3">
           <div className="flex gap-x-2">
             {[1, 2, 3].map((num) => (
               <PresetButton
@@ -115,9 +116,10 @@ const CharEquipment = ({ ocid }: CharEquipmentProps) => {
         {listUpType === "목록" ? (
           <CharEquipmentList
             selectedPresetEquipment={selectedPresetEquipment}
+            charClass={charClass}
           />
         ) : (
-          <Inventory selectedPresetEquipment={selectedPresetEquipment} />
+          <CharInventory selectedPresetEquipment={selectedPresetEquipment} />
         )}
       </div>
     </div>
