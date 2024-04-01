@@ -6,6 +6,7 @@ import {
   Ability,
   Equipment,
   Android,
+  Matrix,
 } from "../types/char";
 
 const apiInstance = axios.create({
@@ -14,11 +15,10 @@ const apiInstance = axios.create({
 });
 
 const today = new Date();
+today.setDate(today.getDate() - 1);
 const formattedDate = `${today.getFullYear()}-${(today.getMonth() + 1)
   .toString()
-  .padStart(2, "0")}-${
-  Number(today.getDate().toString().padStart(2, "0")) - 2
-}`;
+  .padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
 
 const CharApiService = {
   fetchOcidData: async (charName: string | undefined): Promise<string> => {
@@ -141,6 +141,17 @@ const CharApiService = {
     try {
       const res = await apiInstance.get(
         `/character/android-equipment?ocid=${ocid}`
+      );
+      return res.data;
+    } catch (error) {
+      console.error("Error fetching android data:", error);
+      throw error;
+    }
+  },
+  fetchHexa: async (ocid: string, skillGrade: number): Promise<Matrix> => {
+    try {
+      const res = await apiInstance.get(
+        `/character/skill?ocid=${ocid}&character_skill_grade=${skillGrade}`
       );
       return res.data;
     } catch (error) {

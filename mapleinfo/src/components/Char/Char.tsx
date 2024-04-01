@@ -5,6 +5,8 @@ import CharImage from "./CharImage";
 import CharBasic from "./CharBasic";
 import CharStat from "./CharStat";
 import CharEquipment from "./CharEquipment/CharEquipment";
+import CharVmatrix from "./CharVmatrix";
+import CharHexaMatrix from "./CharHexaMatrix";
 
 interface CharProps {
   value: string | undefined;
@@ -43,7 +45,7 @@ const Char = ({ value }: CharProps) => {
   }, [value]);
 
   return (
-    <div className="grow w-full max-w-[1200px] mx-auto  space-y-3 shrink-0 p-3">
+    <div className="grow w-full max-w-[1120px] mx-auto  space-y-3 shrink-0 p-3">
       {charBasicData && (
         <div className="grid grid-cols-1 gap-3 w-full md:grid-cols-[250px_1fr]">
           <div className="grow-0 shrink-0 basis-[250px] space-y-3 ">
@@ -63,8 +65,13 @@ const Char = ({ value }: CharProps) => {
               <CharStat stat={charBasicData.final_stat} ocid={ocid} />
             </div>
           </div>
-          <div className="grow shrink space-y-3">
-            <CharEquipment ocid={ocid} />
+          <div className="grow shrink space-y-2">
+            <CharEquipment
+              ocid={ocid}
+              charClass={charBasicData.character_class}
+            />
+            <CharHexaMatrix ocid={ocid} />
+            <CharVmatrix ocid={ocid} />
           </div>
         </div>
       )}

@@ -91,7 +91,7 @@ const CharStat = ({ stat, ocid }: StatProps) => {
           <StatItem stat={stat} index={42} />
           <div className="flex items-center justify-between px-1 rounded-sm">
             <span>스탯 공격력</span>
-            <span>{stat[1].stat_value}</span>
+            <span>{Number(stat[1].stat_value).toLocaleString()}</span>
           </div>
           {renderStatItems([2, 4, 3, 32])}
         </div>
