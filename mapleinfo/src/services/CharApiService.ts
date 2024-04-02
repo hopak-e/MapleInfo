@@ -8,14 +8,10 @@ import {
   Android,
   Matrix,
 } from "../types/char";
-
-const apiInstance = axios.create({
-  baseURL: "https://open.api.nexon.com/maplestory/v1",
-  headers: { "x-nxopen-api-key": process.env.REACT_APP_API_KEY },
-});
+import { apiInstance } from "./base";
 
 const today = new Date();
-today.setDate(today.getDate() - 1);
+today.setDate(today.getDate() - 3);
 const formattedDate = `${today.getFullYear()}-${(today.getMonth() + 1)
   .toString()
   .padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
@@ -29,6 +25,18 @@ const CharApiService = {
       return res.data.ocid;
     } catch (error) {
       console.error("Error fetching ocid:", error);
+      throw error;
+    }
+  },
+
+  fetchBasicData: async (ocid: string): Promise<CharBasicData> => {
+    try {
+      const res = await apiInstance.get<CharBasicData>(
+        `/character/basic?ocid=${ocid}&date=${formattedDate}`
+      );
+      return res.data;
+    } catch (error) {
+      console.error("Error fetching basic character data:", error);
       throw error;
     }
   },
@@ -75,32 +83,6 @@ const CharApiService = {
       };
     } catch (error) {
       console.error("Error fetching basic character data:", error);
-      throw error;
-    }
-  },
-
-  fetchGuildId: async (
-    guildName: string,
-    worldName: string
-  ): Promise<string> => {
-    try {
-      const res: AxiosResponse<{ oguild_id: string }> = await apiInstance.get(
-        `/guild/id?guild_name=${guildName}&world_name=${worldName}`
-      );
-      return res.data.oguild_id;
-    } catch (error) {
-      console.error("Error fetching guild Id:", error);
-      throw error;
-    }
-  },
-
-  fetchGuildImgUrl: async (oguilId: string): Promise<string | undefined> => {
-    try {
-      const res: AxiosResponse<{ guild_mark_custom: string }> =
-        await apiInstance.get(`/guild/basic?oguild_id=${oguilId}`);
-      return res.data.guild_mark_custom;
-    } catch (error) {
-      console.error("Error fetching guildImgUrl data:", error);
       throw error;
     }
   },

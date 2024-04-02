@@ -37,7 +37,7 @@ const SearchInput = ({ placeholder, width }: SearchInputProps) => {
         placeholder={placeholder}
         onChange={onChange}
         onKeyUp={handleKeyUp}
-        className="grow border-2 border-black  pl-4 py-2 rounded-lg  focus:border-gray-300 w-full h-12 dark:text-black"
+        className="grow border-2 border-black  pl-4 py-2 rounded-lg  focus:border-gray-300 w-full h-12 dark:bg-dark-250 dark:text-black"
       />
       <div className="absolute inset-y-0 right-0 flex items-center pr-3 ">
         <SearchIcon

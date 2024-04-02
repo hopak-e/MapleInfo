@@ -1,8 +1,7 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/HomePage";
-import Guild from "./pages/Guild";
+import Guild from "./pages/GuildPage";
 import Ranking from "./pages/Ranking";
 import Header from "./components/Header/Header";
 import StarForce from "./pages/StarForce";
@@ -11,10 +10,12 @@ import Calc from "./pages/Calc";
 import Cube from "./pages/Cube";
 import Char from "./pages/CharPage";
 import CharPage from "./pages/CharPage";
+import GuildPage from "./pages/GuildPage";
+import GuildDetail from "components/Guild/GuildDetail";
 
 function App() {
   return (
-    <div className="flex flex-col h-lvh dark:bg-dark-50 dark:text-white">
+    <div className="flex flex-col min-h-screen dark:bg-dark-50 dark:text-white">
       <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>
@@ -26,6 +27,11 @@ function App() {
         <Route path="/calc" element={<Calc />}></Route>
         <Route path="/char" element={<Char />}></Route>
         <Route path="/char/:value" element={<CharPage />} />
+        <Route path="/guild/:worldName/:guildName" element={<GuildPage />} />
+        <Route
+          path="/guildDetail/:worldName/:guildName"
+          element={<GuildDetail />}
+        />
       </Routes>
     </div>
   );
