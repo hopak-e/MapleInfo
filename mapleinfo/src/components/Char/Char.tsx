@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import CharApiService from "../../services/CharApiService";
-import { CharBasicData } from "../../types/char";
+import CharApiService from "services/CharApiService";
+import GuildApiService from "services/GuildApiService";
 import CharImage from "./CharImage";
 import CharBasic from "./CharBasic";
 import CharStat from "./CharStat";
 import CharEquipment from "./CharEquipment/CharEquipment";
 import CharVmatrix from "./CharVmatrix";
 import CharHexaMatrix from "./CharHexaMatrix";
+import { CharBasicData } from "../../types/char";
+import { GuilImg } from "types/guild";
 
 interface CharProps {
   value: string | undefined;
@@ -15,7 +17,7 @@ interface CharProps {
 const Char = ({ value }: CharProps) => {
   const [ocid, setOcid] = useState<string>("");
   const [charBasicData, setCharBasicData] = useState<CharBasicData>();
-  const [guildImgUrl, setGuildImgUrl] = useState<string | undefined>();
+  const [guildImgUrl, setGuildImgUrl] = useState<GuilImg>();
 
   //cec4b57b2ce3968a328d5e9c14ed72f7 호팍팍팍팍
   //e0a4f439e53c369866b55297d2f5f4eb 아델
@@ -29,12 +31,13 @@ const Char = ({ value }: CharProps) => {
         setCharBasicData(basicData);
 
         if (basicData.character_guild_name !== null) {
-          const oguildId: string = await CharApiService.fetchGuildId(
+          const oguildId: string = await GuildApiService.fetchGuildId(
             basicData.character_guild_name,
             basicData.world_name
           );
-          const guildImgUrl: string | undefined =
-            await CharApiService.fetchGuildImgUrl(oguildId);
+          const guildImgUrl: GuilImg = await GuildApiService.fetchGuildImgUrl(
+            oguildId
+          );
           setGuildImgUrl(guildImgUrl);
         }
       } catch (error) {

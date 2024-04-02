@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { EquipmentPreset } from "../../../types/char";
+import { EquipmentPreset } from "types/char";
 import { replacementMap } from "../constants";
 import { orderedListSlots } from "../constants";
 import CharCurrentItem from "./CharCurrentItem";
 import { mainStats, demonAvengerAddOption } from "../constants";
-import BlueStar from "../../../assets/bluestar.svg";
-import Star from "../../../assets/star.svg";
+import BlueStar from "assets/bluestar.svg";
+import Star from "assets/star.svg";
 
 interface Props {
   selectedPresetEquipment: EquipmentPreset[] | undefined;
@@ -100,7 +100,7 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
             item && (
               <div
                 className="relative text-sm py-1 cursor-pointer bg-dark-50 rounded-md"
-                key={item.item_name}
+                key={item.item_equipment_slot}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >

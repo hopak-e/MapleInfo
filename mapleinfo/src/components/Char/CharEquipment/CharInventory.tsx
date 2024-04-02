@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { EquipmentPreset } from "../../../types/char";
+import { EquipmentPreset } from "types/char";
 import { orderedInventorySlots } from "../constants";
-import Star from "../../../assets/star.svg";
+import Star from "assets/star.svg";
 import CharCurrentItem from "./CharCurrentItem";
 
 interface SelectedEquipProps {
@@ -42,7 +42,7 @@ const CharInventory = ({ selectedPresetEquipment }: SelectedEquipProps) => {
           orderedInventory.map((item) =>
             item ? (
               <div
-                key={item.item_name}
+                key={item.item_equipment_slot}
                 className={`relative flex justify-center rounded-md cursor-pointer ${getBorderStyle(
                   item.potential_option_grade
                 )}`}

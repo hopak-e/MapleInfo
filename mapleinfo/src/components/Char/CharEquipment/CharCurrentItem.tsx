@@ -1,9 +1,9 @@
-import { EquipmentPreset } from "../../../types/char";
+import { EquipmentPreset } from "types/char";
 import StarCountDisplay from "./StarCountDisplay";
-import Rare from "../../../assets/rare.png";
-import Epic from "../../../assets/epic.png";
-import Unique from "../../../assets/unique.png";
-import Legendary from "../../../assets/legendary.png";
+import Rare from "assets/rare.png";
+import Epic from "assets/epic.png";
+import Unique from "assets/unique.png";
+import Legendary from "assets/legendary.png";
 
 interface CurrentItemProps {
   currentItem: EquipmentPreset;
@@ -127,14 +127,17 @@ const CharCurrentItem = ({ currentItem }: CurrentItemProps) => {
               scrollFlag={currentItem.starforce_scroll_flag}
             />
           ) : null}
-          <div className="font-[800] text-md">{currentItem.soul_option}</div>
-          <div className="text-center text-[14px] font-[800]">{`${
-            currentItem.item_name
-          }${
-            currentItem.scroll_upgrade && currentItem.scroll_upgrade !== "0"
-              ? `  (+${currentItem.scroll_upgrade})`
-              : ""
-          }`}</div>
+          <div className="text-center text-[14px] font-[800]">
+            {`${currentItem.item_name}${
+              currentItem.scroll_upgrade && currentItem.scroll_upgrade !== "0"
+                ? `  (+${currentItem.scroll_upgrade})`
+                : ""
+            }`}
+            {currentItem.special_ring_level &&
+            currentItem.special_ring_level !== 0
+              ? ` Lv${currentItem.special_ring_level}`
+              : null}
+          </div>
           {currentItem.potential_option_grade && (
             <div>{currentItem.potential_option_grade} 아이템</div>
           )}
@@ -333,6 +336,12 @@ const CharCurrentItem = ({ currentItem }: CurrentItemProps) => {
             <div className="whitespace-normal">
               {currentItem.item_description}
             </div>
+          </div>
+        )}
+        {currentItem.soul_name && (
+          <div className="text-left px-3 text-[11px] border-dark-150 py-2 border-t-[1px] border-dashed">
+            <div className="text-starforce-50">{currentItem.soul_name}</div>
+            <div className="">{currentItem.soul_option}</div>
           </div>
         )}
       </div>

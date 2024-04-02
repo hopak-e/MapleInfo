@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { CharStatData, AbilityPreset, HyperStatPreset } from "../../types/char";
 import PresetButton from "../bottons/PresetButton";
-import CharApiService from "../../services/CharApiService";
+import CharApiService from "services/CharApiService";
 
 interface Props {
   stat: CharStatData[];

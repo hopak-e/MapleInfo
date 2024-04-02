@@ -3,7 +3,7 @@ import SearchInput from "../inputs/SearchInput";
 
 const Home = () => {
   return (
-    <div className="w-screen h-[calc(100vh-9rem)] mt-4">
+    <div className="w-screen h-[calc(100vh-9rem)]">
       <div className="bg-wallpaper bg-cover w-full h-full relative">
         <div className="flex flex-col py-32 items-center">
           <div className="flex items-center text-white text-4xl h-24">

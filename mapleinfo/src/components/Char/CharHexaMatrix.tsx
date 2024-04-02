@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import CharApiService from "../../services/CharApiService";
-import { Matrix, Skill } from "../../types/char";
+import CharApiService from "services/CharApiService";
+import { Matrix, Skill } from "types/char";
 
 interface CharHexaMatrixProps {
   ocid: string;

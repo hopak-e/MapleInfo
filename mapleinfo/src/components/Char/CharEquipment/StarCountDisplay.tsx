@@ -1,6 +1,6 @@
-import Star from "../../../assets/star.svg";
-import GrayStar from "../../../assets/graystar.svg";
-import BlueStar from "../../../assets/bluestar.svg";
+import Star from "assets/star.svg";
+import GrayStar from "assets/graystar.svg";
+import BlueStar from "assets/bluestar.svg";
 
 interface Props {
   starforce: string | undefined;

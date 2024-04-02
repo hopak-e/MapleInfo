@@ -1,8 +1,9 @@
-import { CharBasicData } from "../../types/char";
+import { CharBasicData } from "types/char";
+import { GuilImg } from "types/guild";
 
 interface CharBasicDataProps {
   charBasicData: CharBasicData;
-  guildImgUrl: string | undefined;
+  guildImgUrl: GuilImg | undefined;
 }
 
 const CharBasic = ({ charBasicData, guildImgUrl }: CharBasicDataProps) => {

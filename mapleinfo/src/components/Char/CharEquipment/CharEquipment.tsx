@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import CharApiService from "../../../services/CharApiService";
-import { EquipmentPreset } from "../../../types/char";
-import PresetButton from "../../bottons/PresetButton";
+import CharApiService from "services/CharApiService";
+import { EquipmentPreset } from "types/char";
+import PresetButton from "components/bottons/PresetButton";
 import CharEquipmentList from "./CharEquipmentList";
 import CharInventory from "./CharInventory";
 
@@ -127,3 +127,4 @@ const CharEquipment = ({ ocid, charClass }: CharEquipmentProps) => {
 };
 
 export default CharEquipment;
+//
