@@ -7,7 +7,8 @@ import {
   Equipment,
   Android,
   Matrix,
-} from "../types/char";
+  UnionRanking,
+} from "types/char";
 import { apiInstance } from "./base";
 
 const today = new Date();
@@ -83,6 +84,18 @@ const CharApiService = {
       };
     } catch (error) {
       console.error("Error fetching basic character data:", error);
+      throw error;
+    }
+  },
+
+  fetchUnionData: async (ocid: string): Promise<UnionRanking> => {
+    try {
+      const res: AxiosResponse<UnionRanking> = await apiInstance.get(
+        `/ranking/union?date=2023-12-22&ocid=${ocid}`
+      );
+      return res.data;
+    } catch (error) {
+      console.error("Error fetching union data:", error);
       throw error;
     }
   },

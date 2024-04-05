@@ -4,7 +4,7 @@ import Home from "./pages/HomePage";
 import Guild from "./pages/GuildPage";
 import Ranking from "./pages/Ranking";
 import Header from "./components/Header/Header";
-import StarForce from "./pages/StarForce";
+import StarForce from "components/StarForce/StarForce";
 import MainChar from "./pages/MainChar";
 import Calc from "./pages/Calc";
 import Cube from "./pages/Cube";
@@ -12,6 +12,8 @@ import Char from "./pages/CharPage";
 import CharPage from "./pages/CharPage";
 import GuildPage from "./pages/GuildPage";
 import GuildDetail from "components/Guild/GuildDetail";
+import TrackChar from "components/TrackChar/TrackChar";
+import TrackedChar from "components/TrackChar/TrackedChar";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
           path="/guildDetail/:worldName/:guildName"
           element={<GuildDetail />}
         />
+        <Route path="/trackChar/" element={<TrackChar />} />
+        <Route path="/trackChar/:nickName" element={<TrackedChar />} />
       </Routes>
     </div>
   );

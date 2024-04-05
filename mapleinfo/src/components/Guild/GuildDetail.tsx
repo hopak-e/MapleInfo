@@ -4,6 +4,7 @@ import { Guild, GuildSkill } from "types/guild";
 import GuildApiService from "services/GuildApiService";
 import GuildInput from "./GuildInput";
 import CharApiService from "services/CharApiService";
+import Crown from "assets/crown.svg";
 
 interface MemberInfo {
   name: string;
@@ -73,7 +74,7 @@ const GuildDetail = () => {
           }
 
           if (guildBasicData.guild_member) {
-            const batchSize = 20; // 한 번에 처리할 요소의 개수
+            const batchSize = 20;
             const result: MemberInfo[] = [];
 
             for (
@@ -208,8 +209,8 @@ const GuildDetail = () => {
             <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mt-2">
               {memberInfo &&
                 memberInfo.map((member) => (
-                  <Link to={`/char/${member}`}>
-                    <div className="text-[14px] p-1 sm:px-3 sm:py-2 bg-dark-100 rounded-md">
+                  <Link to={`/char/${member.name}`}>
+                    <div className="relative text-[14px] p-1 sm:px-3 sm:py-2 bg-dark-100 rounded-md">
                       <div className="flex items-center gap-x-2">
                         <img
                           src={member.imgUrl}
@@ -224,6 +225,13 @@ const GuildDetail = () => {
                           <div className="text-[11px]">{member.class}</div>
                         </div>
                       </div>
+                      {guildData.guild_master_name === member.name && (
+                        <img
+                          src={Crown}
+                          alt="crown"
+                          className="absolute top-1 right-1 w-6 h-6"
+                        />
+                      )}
                     </div>
                   </Link>
                 ))}

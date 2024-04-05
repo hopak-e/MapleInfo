@@ -23,7 +23,7 @@ const Header = () => {
     { id: 2, name: "랭킹", link: "/ranking" },
     { id: 3, name: "큐브", link: "/cube" },
     { id: 4, name: "스타포스", link: "/starforce" },
-    { id: 5, name: "본캐 찾기", link: "/mainchar" },
+    { id: 5, name: "본캐 찾기", link: "/trackChar" },
     { id: 6, name: "계산기", link: "/calc" },
   ];
 

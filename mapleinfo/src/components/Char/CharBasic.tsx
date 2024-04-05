@@ -22,9 +22,13 @@ const CharBasic = ({ charBasicData, guildImgUrl }: CharBasicDataProps) => {
           <span>{charBasicData.world_name}</span>
         </div>
         <div className="flex px-2 py-1 rounded-xl ml-2 bg-dark-250 items-center">
-          {guildImgUrl !== undefined && (
+          {guildImgUrl && (
             <img
-              src={`data:image/png;base64,${guildImgUrl}`}
+              src={
+                guildImgUrl.guild_mark
+                  ? guildImgUrl.guild_mark
+                  : `data:image/png;base64,${guildImgUrl.guild_mark_custom}`
+              }
               alt="길드마크"
               className="w-[14px] h-[14px]"
             />

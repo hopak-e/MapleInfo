@@ -77,7 +77,7 @@ const GuildSuroRanking = () => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-5">
         {worldSuro &&
           worldSuro.map((guild) => (
-            <Link to={`/guild/${guild.world_name}/${guild.guild_name}`}>
+            <Link to={`/guildDetail/${guild.world_name}/${guild.guild_name}`}>
               <div
                 className=" min-w-[140px] px-3 py-2 rounded-sm bg-dark-200"
                 key={guild.guild_master_name}
