@@ -33,7 +33,14 @@ module.exports = {
           etc: "#AAAAFF",
           starforce: "#FFCC01",
         },
-        starforce: { 50: "#F5A630", 100: "#FFF8E8", 150: "#312A20" },
+        starforce: {
+          50: "#F5A630",
+          100: "#FFF8E8",
+          150: "#312A20",
+          success: "#27344E",
+          failed: "#59343B",
+          destroyed: "#828380",
+        },
       },
       backgroundImage: {
         wallpaper: "url('./assets/wallpaper.svg')",
