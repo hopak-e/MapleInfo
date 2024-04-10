@@ -7,7 +7,7 @@ import Header from "./components/Header/Header";
 import StarForce from "components/StarForce/StarForce";
 import MainChar from "./pages/MainChar";
 import Calc from "./pages/Calc";
-import Cube from "./pages/Cube";
+import Cube from "./pages/CubePage";
 import Char from "./pages/CharPage";
 import CharPage from "./pages/CharPage";
 import GuildPage from "./pages/GuildPage";

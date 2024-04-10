@@ -102,16 +102,6 @@ const CharCurrentItem = ({ currentItem }: CurrentItemProps) => {
       return <img src={Rare} alt="레어" className="w-[12px] h-[12px]" />;
   };
 
-  const gradeItemOptionStyles: { [key: string]: string } = {
-    레전드리: "text-potential-50",
-    유니크: "text-potential-100",
-    에픽: "text-potential-150",
-    레어: "text-potential-200",
-  };
-  const getPotentialOptionStyles = (potentialOptionGrade: string) => {
-    return gradeItemOptionStyles[potentialOptionGrade];
-  };
-
   return (
     <div>
       <div className="text-center text-xs w-[240px] dark:bg-dark-100 rounded-sm border border-dark-100">
@@ -297,9 +287,7 @@ const CharCurrentItem = ({ currentItem }: CurrentItemProps) => {
               <div className="flex items-center gap-x-[2px] ">
                 {getPotentialImg(currentItem.potential_option_grade)}
                 <span
-                  className={getPotentialOptionStyles(
-                    currentItem.potential_option_grade
-                  )}
+                  className={`text-potential-${currentItem.potential_option_grade}`}
                 >
                   잠재 옵션
                 </span>
@@ -316,9 +304,7 @@ const CharCurrentItem = ({ currentItem }: CurrentItemProps) => {
                     currentItem.additional_potential_option_grade
                   )}
                   <span
-                    className={`${getPotentialOptionStyles(
-                      currentItem.additional_potential_option_grade
-                    )}`}
+                    className={`text-potentail-${currentItem.additional_potential_option_grade}`}
                   >
                     에디셔널 잠재 옵션
                   </span>

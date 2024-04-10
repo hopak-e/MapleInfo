@@ -23,10 +23,10 @@ module.exports = {
           400: "#263140",
         },
         potential: {
-          50: "#CBFF00",
-          100: "#FFCC01",
-          150: "#B76CFD",
-          200: "#66FFFE",
+          레전드리: "#CBFF00",
+          유니크: "#FFCC01",
+          에픽: "#B76CFD",
+          레어: "#66FFFE",
         },
         itemoption: {
           add: "#CBFF00",

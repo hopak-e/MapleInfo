@@ -157,15 +157,8 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
                     </div>
                     <div className="text-[11px] space-y-0.5">
                       <div
-                        className={`${
-                          item.potential_option_grade === "레전드리"
-                            ? "text-potential-50"
-                            : item.potential_option_grade === "유니크"
-                            ? "text-potential-100"
-                            : item.potential_option_grade === "에픽"
-                            ? "text-potential-150"
-                            : "text-potential-200"
-                        }`}
+                        className={`text-potential-${item.potential_option_grade} 
+                        `}
                       >
                         {item.potential_option_1 && (
                           <span className="pr-1 dark:text-white">잠재</span>
@@ -187,16 +180,7 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
                         </span>
                       </div>
                       <div
-                        className={`${
-                          item.additional_potential_option_grade === "레전드리"
-                            ? "text-potential-50"
-                            : item.additional_potential_option_grade ===
-                              "유니크"
-                            ? "text-potential-100"
-                            : item.additional_potential_option_grade === "에픽"
-                            ? "text-potential-150"
-                            : "text-potential-200"
-                        }`}
+                        className={`text-potential-${item.additional_potential_option_grade}`}
                       >
                         {item.additional_potential_option_1 && (
                           <span className="pr-1 dark:text-white">에디</span>
