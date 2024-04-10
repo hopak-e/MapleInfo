@@ -56,10 +56,6 @@ const StarForceMainChar = ({ starForceHistory }: StarForceMainCharProps) => {
           </div>
         </div>
       )}
-      <div className="flex text-[14px] gap-x-2">
-        <div>강화 내역</div>
-        <div>상세 내역</div>
-      </div>
     </div>
   );
 };
