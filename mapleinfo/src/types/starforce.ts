@@ -30,3 +30,7 @@ export interface StarForceHistory {
     }
   ];
 }
+
+export interface Statement {
+  [key: number]: { count: number; success: number; destroyed: number };
+}
