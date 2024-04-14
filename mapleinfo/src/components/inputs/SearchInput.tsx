@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as SearchIcon } from "../../assets/search.svg";
+import DarkModeSearch from "assets/darkModeSearch.svg";
+import WhiteModeSearch from "assets/whiteModeSearch.svg";
 
 interface SearchInputProps {
   placeholder: string;
   width?: string;
+  isDark: boolean;
 }
 
-const SearchInput = ({ placeholder, width }: SearchInputProps) => {
+const SearchInput = ({ placeholder, width, isDark }: SearchInputProps) => {
   const [value, setValue] = useState("");
   const navigate = useNavigate();
 
@@ -28,23 +30,23 @@ const SearchInput = ({ placeholder, width }: SearchInputProps) => {
       handleSearch();
     }
   };
-  //onkeydown => onkeyup 영문과 한글은 입력 처리방식 달라서 onkeyup을 사용
+
   return (
-    <div className={`relative ${width}`}>
+    <div className={`relative grow min-w-[180px] ${width} `}>
       <input
         type="text"
         value={value}
         placeholder={placeholder}
         onChange={onChange}
         onKeyUp={handleKeyUp}
-        className="grow border-2 border-black  pl-4 py-2 rounded-lg  focus:border-gray-300 w-full h-12 dark:bg-dark-250 dark:text-black"
+        className="grow border-1 border-black  pl-3 py-1 rounded-lg focus:border-gray-300 w-full dark:bg-dark-250"
       />
-      <div className="absolute inset-y-0 right-0 flex items-center pr-3 ">
-        <SearchIcon
-          fill="#000"
-          cursor="pointer"
-          className="w-8"
+      <div className="absolute inset-y-0 right-3 flex items-center min-w-3">
+        <img
+          src={isDark ? DarkModeSearch : WhiteModeSearch}
+          className="w-4 h-4 md:w-6 md:h-6 fill-white stroke-white"
           onClick={handleSearch}
+          alt="search-icon"
         />
       </div>
     </div>

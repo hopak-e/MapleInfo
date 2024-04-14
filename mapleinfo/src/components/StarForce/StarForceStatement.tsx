@@ -17,7 +17,7 @@ const StarForceStatement = ({
 
   return (
     <div className="grow-0 shrink-0 basis-[250px] ">
-      <div className="flex w-full text-center mb-2">
+      <div className="flex w-full text-center mb-2 bg-dark-50 rounded-sm py-1">
         <div className="flex-1">
           <div>강화 횟수</div>
           <div>{starForceHistory?.length}</div>
@@ -28,7 +28,7 @@ const StarForceStatement = ({
         </div>
       </div>
       <div className="flex flex-col items-center">
-        <table className="flex flex-col justify-center text-center w-[250px]">
+        <table className="flex flex-col justify-center text-center w-[250px] bg-dark-50 rounded-sm py-1">
           <thead>
             <tr className="flex">
               <th className="flex-1">구간</th>
@@ -59,7 +59,7 @@ const StarForceStatement = ({
             )}
           </tbody>
         </table>
-        <div className="text-[10px]">
+        <div className="text-[10px] bg-dark-50 rounded-sm p-1 mt-1">
           {`12성 미만 구간 및 확률이 100%인 구간의 경우 위 확률표에서 제외됩니다. (찬스타임, 5,10,15 100%확률)`}
         </div>
       </div>

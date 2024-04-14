@@ -20,10 +20,9 @@ const GuildDetail = () => {
   }>();
   const [guildData, setGuildData] = useState<Guild>();
   const [hoveredNovel, setHoveredNovel] = useState<GuildSkill | null>(null);
-  const [memberInfo, setMemberInfo] = useState<MemberInfo[]>([]);
+  const [memberInfo, setMemberInfo] = useState<(MemberInfo | null)[]>([]);
 
   const today = new Date();
-  today.setDate(today.getDate() - 3);
   const formattedDate = `${today.getFullYear()}-${(today.getMonth() + 1)
     .toString()
     .padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
@@ -42,20 +41,20 @@ const GuildDetail = () => {
           const [fameRanking, flagRanking, suroRanking] = await Promise.all([
             GuildApiService.fetchRankingData(
               formattedDate,
-              worldName,
               0,
+              worldName,
               guildName
             ),
             GuildApiService.fetchRankingData(
               formattedDate,
-              worldName,
               1,
+              worldName,
               guildName
             ),
             GuildApiService.fetchRankingData(
               formattedDate,
-              worldName,
               2,
+              worldName,
               guildName
             ),
           ]);
@@ -75,7 +74,7 @@ const GuildDetail = () => {
 
           if (guildBasicData.guild_member) {
             const batchSize = 20;
-            const result: MemberInfo[] = [];
+            const result: (MemberInfo | null)[] = [];
 
             for (
               let i = 0;
@@ -85,18 +84,31 @@ const GuildDetail = () => {
               const batch = guildBasicData.guild_member.slice(i, i + batchSize);
               const batchResults = await Promise.all(
                 batch.map(async (member) => {
-                  const ocid = await CharApiService.fetchOcidData(member);
-                  const memberInfo = await CharApiService.fetchBasicData(ocid);
+                  try {
+                    const ocid = await CharApiService.fetchOcidData(member);
+                    const memberInfo = await CharApiService.fetchBasicData(
+                      ocid
+                    );
 
-                  return {
-                    name: memberInfo.character_name,
-                    level: memberInfo.character_level,
-                    class: memberInfo.character_class,
-                    imgUrl: memberInfo.character_image,
-                  };
+                    return {
+                      name: memberInfo.character_name,
+                      level: memberInfo.character_level,
+                      class: memberInfo.character_class,
+                      imgUrl: memberInfo.character_image,
+                    };
+                  } catch (error) {
+                    console.error(
+                      `Error fetching data for member ${member}`,
+                      error
+                    );
+                    return null;
+                  }
                 })
               );
-              result.push(...batchResults);
+              const filteredResults = batchResults.filter(
+                (result) => result !== null
+              );
+              result.push(...filteredResults);
             }
             setMemberInfo(result);
           }
@@ -135,7 +147,7 @@ const GuildDetail = () => {
                   alt={guildData.guild_name}
                   className="w-10 h-10"
                 />
-                <span className="font-[800]">{guildData.guild_name}</span>
+                <span className="font-[700]">{guildData.guild_name}</span>
               </div>
               <div className="relative flex text-center text-[12px] gap-x-0.5">
                 {guildData.guild_noblesse_skill &&
@@ -156,7 +168,7 @@ const GuildDetail = () => {
                           onMouseEnter={() => setHoveredNovel(null)}
                         >
                           <div className="flex flex-col text-[11px] leading-[1.35em]">
-                            <div className="text-[16px] text-center font-[800] py-2">
+                            <div className="text-[16px] text-center font-[700] py-2">
                               {item.skill_name}
                             </div>
                             <div className="relative flex justify-between gap-x-2 font-[400] pb-3 border-b border-dark-150 border-dashed">
@@ -208,33 +220,36 @@ const GuildDetail = () => {
             </div>
             <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mt-2">
               {memberInfo &&
-                memberInfo.map((member) => (
-                  <Link to={`/char/${member.name}`}>
-                    <div className="relative text-[14px] p-1 sm:px-3 sm:py-2 bg-dark-100 rounded-md">
-                      <div className="flex items-center gap-x-2">
-                        <img
-                          src={member.imgUrl}
-                          alt={member.name}
-                          className="w-[60px] h-[60px] sm:w-[82px] sm:h-[82px] shrink-0 grow-0"
-                        />
-                        <div className="grow shrink">
-                          <div className="sm:text-xl font-[600]">
-                            {member.name}
+                memberInfo.map(
+                  (member) =>
+                    member && (
+                      <Link to={`/char/${member.name}`}>
+                        <div className="relative text-[14px] p-1 sm:px-3 sm:py-2 bg-dark-100 rounded-md">
+                          <div className="flex items-center gap-x-2">
+                            <img
+                              src={member.imgUrl}
+                              alt={member.name}
+                              className="w-[60px] h-[60px] sm:w-[82px] sm:h-[82px] shrink-0 grow-0"
+                            />
+                            <div className="grow shrink">
+                              <div className="sm:text-xl font-[600]">
+                                {member.name}
+                              </div>
+                              <div className="text-[11px]">{`Lv.${member.level}`}</div>
+                              <div className="text-[11px]">{member.class}</div>
+                            </div>
                           </div>
-                          <div className="text-[11px]">{`Lv.${member.level}`}</div>
-                          <div className="text-[11px]">{member.class}</div>
+                          {guildData.guild_master_name === member.name && (
+                            <img
+                              src={Crown}
+                              alt="crown"
+                              className="absolute top-1 right-1 w-6 h-6"
+                            />
+                          )}
                         </div>
-                      </div>
-                      {guildData.guild_master_name === member.name && (
-                        <img
-                          src={Crown}
-                          alt="crown"
-                          className="absolute top-1 right-1 w-6 h-6"
-                        />
-                      )}
-                    </div>
-                  </Link>
-                ))}
+                      </Link>
+                    )
+                )}
             </div>
           </div>
         )}

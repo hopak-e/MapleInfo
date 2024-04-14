@@ -6,6 +6,7 @@ import CharCurrentItem from "./CharCurrentItem";
 import { mainStats, demonAvengerAddOption } from "../constants";
 import BlueStar from "assets/bluestar.svg";
 import Star from "assets/star.svg";
+import gradeTextStyle from "utils/styleUtils/gradeTextStyle";
 
 interface Props {
   selectedPresetEquipment: EquipmentPreset[] | undefined;
@@ -60,16 +61,18 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
         );
         return mainAddOption > 0 ? mainAddOption + "급" : "";
       } else if (charClass === "데몬어벤져") {
-        const mainStatValue =
-          demonAvengerAddOption[base_equipment_level][
-            item_add_option[mainStat] as string
-          ];
-        const specificStatValue = item_add_option.attack_power;
-        return mainStatValue
-          ? specificStatValue !== "0"
-            ? `HP${mainStatValue} 공${specificStatValue}`
-            : `HP${mainStatValue}`
-          : "";
+        if (base_equipment_level > 130) {
+          const mainStatValue: string =
+            demonAvengerAddOption[base_equipment_level][
+              item_add_option[mainStat] as string
+            ];
+          const specificStatValue = item_add_option.attack_power;
+          return mainStatValue
+            ? specificStatValue !== "0"
+              ? `HP${mainStatValue} 공${specificStatValue}`
+              : `HP${mainStatValue}`
+            : "";
+        }
       } else {
         const mainStatValue = parseInt(
           (item_add_option[mainStat] as string) || "0"
@@ -130,7 +133,7 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
                                 className="w-3 h-3"
                               />
                             </span>
-                            <span>{item.starforce}</span>
+                            <span className="font-[700]">{item.starforce}</span>
                           </div>
                         )}
                       {item.item_add_option &&
@@ -139,7 +142,7 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
                           item.item_equipment_slot,
                           item.item_base_option?.base_equipment_level
                         ) && (
-                          <div className="flex items-center text-potential-200 text-[10px]">
+                          <div className="flex items-center text-potential-200 text-[10px] font-[700]">
                             {`${calculateMainAddOption(
                               item.item_add_option,
                               item.item_equipment_slot,
@@ -157,8 +160,10 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
                     </div>
                     <div className="text-[11px] space-y-0.5">
                       <div
-                        className={`text-potential-${item.potential_option_grade} 
-                        `}
+                        className={
+                          item.potential_option_grade &&
+                          `${gradeTextStyle(item.potential_option_grade)}`
+                        }
                       >
                         {item.potential_option_1 && (
                           <span className="pr-1 dark:text-white">잠재</span>
@@ -180,7 +185,12 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
                         </span>
                       </div>
                       <div
-                        className={`text-potential-${item.additional_potential_option_grade}`}
+                        className={
+                          item.additional_potential_option_grade &&
+                          `${gradeTextStyle(
+                            item.additional_potential_option_grade
+                          )}`
+                        }
                       >
                         {item.additional_potential_option_1 && (
                           <span className="pr-1 dark:text-white">에디</span>

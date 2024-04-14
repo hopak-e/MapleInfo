@@ -5,7 +5,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.module.css";
 import useOutsideClick from "hooks/useOutsideClick";
 import DownArrow from "assets/downarrow.svg";
-import formatDate from "utils/formatDate";
+import formatDate from "utils/dateUtils/formatDate";
+import gradeTransToEng from "utils/styleUtils/gradeTransToEng";
+import gradeTextStyle from "utils/styleUtils/gradeTextStyle";
 
 interface CubeResultListProps {
   cubeHistory: CubeHistory[];
@@ -66,7 +68,7 @@ const CubeResultList = ({
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 100);
   };
-  console.log(filteredCubeHistory);
+
   return (
     <div className="grow shrink bg-dark-50">
       <div className="px-2 py-1">
@@ -88,7 +90,7 @@ const CubeResultList = ({
                   startDate={startDate}
                   dateFormat="yyyy-MM-dd"
                   placeholderText="시작일"
-                  className="w-[85px] border px-1 py-0.5 cursor-pointer"
+                  className="w-[80px] border px-1 pt-1 pb-0.5 cursor-pointer rounded-md"
                 />
               </div>
               <div>
@@ -102,22 +104,22 @@ const CubeResultList = ({
                   minDate={startDate}
                   dateFormat="yyyy-MM-dd"
                   placeholderText="종료일"
-                  className="w-[85px] border px-1 py-0.5 cursor-pointer"
+                  className="w-[80px] border px-1 pt-1 pb-0.5 cursor-pointer rounded-md"
                 />
               </div>
             </div>
           </div>
         </div>
-        <div className="flex gap-x-2 text-[12px]">
+        <div className="flex gap-x-2 text-[12px] mt-3">
           <div
             ref={itemListRef}
-            className="relative flex items-center gap-x-2 px-2 py-1 border rounded-sm cursor-pointer"
+            className="relative flex items-center gap-x-2 px-2 py-1 border rounded-sm cursor-pointer bg-dark-200"
             onClick={() => setIsItemListOpen(!isItemListOpen)}
           >
             <button>{selectedItem}</button>
             <img src={DownArrow} alt="downarrow" className="w-4 h-4" />
             {isItemListOpen && (
-              <ul className="absolute w-[160px] h-[200px] top-[100%] left-[-10%] overflow-y-auto z-10 bg-dark-200">
+              <ul className="absolute w-[160px] max-h-[200px] top-[100%] left-[-10%] overflow-y-auto z-10 bg-dark-200">
                 {equipList &&
                   equipList.map((item, index) => (
                     <li
@@ -133,13 +135,13 @@ const CubeResultList = ({
           </div>
           <div
             ref={characterListRef}
-            className="relative flex items-center gap-x-2 px-2 py-1 border rounded-sm cursor-pointer"
+            className="relative flex items-center gap-x-2 px-2 py-1 border rounded-sm cursor-pointer bg-dark-200"
             onClick={() => setIsCharacterListOpen(!isCharacterListOpen)}
           >
             <button>{selectedCharacter}</button>
             <img src={DownArrow} alt="downarrow" className="w-4 h-4" />
             {isCharacterListOpen && (
-              <ul className="absolute w-[160px] h-[200px] top-[100%] left-[-10%] overflow-y-auto z-10 bg-dark-200">
+              <ul className="absolute w-[160px] max-h-[200px] top-[100%] left-[-10%] overflow-y-auto z-10 bg-dark-200">
                 {characterList &&
                   characterList.map((char, index) => (
                     <li
@@ -154,34 +156,49 @@ const CubeResultList = ({
             )}
           </div>
         </div>
-        <div className="flex flex-col gap-y-2 text-[11px] md:text-[12px] mt-2">
+        <div className="flex flex-col gap-y-2 text-[10px] md:text-[12px] mt-2">
           {filteredCubeHistory &&
             filteredCubeHistory.slice(0, visibleCount).map((history) => (
               <div
                 key={history.id}
-                className={`flex items-center p-2 ${
+                className={`grid grid-cols-[auto_1fr_1fr_auto] items-center p-2 ${
                   history.item_upgrade_result === "성공" &&
                   "bg-starforce-success"
-                } bg-dark-200`}
+                } bg-dark-200 gap-x-1`}
               >
-                <div className="flex-1">
+                <div className="">
                   <div>{history.potential_type}</div>
-                  <div className="text-[14px] md:text-[16px] font-[500]">
+                  <div className="text-[11px] md:text-[14px] font-[500]">
                     {history.target_item}
                   </div>
-                  <div className="flex"></div>
                 </div>
-                <div className="flex-1 text-center">
-                  <div>
-                    {history.potential_type === "잠재능력 재설정"
-                      ? "잠재옵션"
-                      : "에디옵션"}
+                <div className="text-center text-[10px] md:text-[12px]">
+                  <div className="flex justify-center items-center gap-x-0.5">
+                    <img
+                      src={
+                        history.potential_type === "잠재능력 재설정"
+                          ? require(`assets/${gradeTransToEng(
+                              history.before_potential_option[0].grade
+                            )}.png`)
+                          : require(`assets/${gradeTransToEng(
+                              history.before_additional_potential_option[0]
+                                .grade
+                            )}.png`)
+                      }
+                      alt="grade-img"
+                      className="w-3 h-3 md:w-4 md:h-4"
+                    />
+                    <span>
+                      {history.potential_type === "잠재능력 재설정"
+                        ? "잠재옵션"
+                        : "에디옵션"}
+                    </span>
                   </div>
                   {history.potential_type === "잠재능력 재설정"
                     ? history.before_potential_option.map((option, index) => (
                         <div
                           key={index}
-                          className={`text-potential-${option.grade}`}
+                          className={`${gradeTextStyle(option.grade)}`}
                         >
                           {option.value}
                         </div>
@@ -190,24 +207,39 @@ const CubeResultList = ({
                         (option, index) => (
                           <div
                             key={index}
-                            className={`text-potential-${option.grade}`}
+                            className={`${gradeTextStyle(option.grade)}`}
                           >
                             {option.value}
                           </div>
                         )
                       )}
                 </div>
-                <div className="flex-1 text-center">
-                  <div>
-                    {history.potential_type === "잠재능력 재설정"
-                      ? "잠재옵션"
-                      : "에디옵션"}
+                <div className="flex-1 text-center ">
+                  <div className="flex justify-center items-center gap-x-0.5">
+                    <img
+                      src={
+                        history.potential_type === "잠재능력 재설정"
+                          ? require(`assets/${gradeTransToEng(
+                              history.after_potential_option[0].grade
+                            )}.png`)
+                          : require(`assets/${gradeTransToEng(
+                              history.after_additional_potential_option[0].grade
+                            )}.png`)
+                      }
+                      alt="grade-img"
+                      className="w-3 h-3 md:w-4 md:h-4"
+                    />
+                    <span>
+                      {history.potential_type === "잠재능력 재설정"
+                        ? "잠재옵션"
+                        : "에디옵션"}
+                    </span>
                   </div>
                   {history.potential_type === "잠재능력 재설정"
                     ? history.after_potential_option.map((option, index) => (
                         <div
                           key={index}
-                          className={`text-potential-${option.grade}`}
+                          className={`${gradeTextStyle(option.grade)}`}
                         >
                           {option.value}
                         </div>
@@ -216,14 +248,14 @@ const CubeResultList = ({
                         (option, index) => (
                           <div
                             key={index}
-                            className={`text-potential-${option.grade}`}
+                            className={`${gradeTextStyle(option.grade)}`}
                           >
                             {option.value}
                           </div>
                         )
                       )}
                 </div>
-                <div className="flex-1 text-right">
+                <div className="text-right">
                   <div>{formatDate(new Date(history.date_create))}</div>
                   <div>{history.character_name}</div>
                 </div>

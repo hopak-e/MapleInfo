@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import CubeApiService from "services/CubeApiService";
-import formatDate from "utils/formatDate";
-import getDateRange from "utils/getDateRange";
-import { CubeHistory, CubeStatement } from "types/cube";
+import formatDate from "utils/dateUtils/formatDate";
+import getDateRange from "utils/dateUtils/getDateRange";
+import { CubeHistory, CubeStatements } from "types/cube";
 import { cubePotentialPrice, cubeAdditionalPotentialPrice } from "./constants";
 import CubeMainChar from "./CubeMainChar";
 import CubeResultList from "./CubeResultList";
+import CubeStatement from "./CubeStatement";
+import formatNumber from "utils/formatNumber";
 
 const Cube = () => {
   const [cubeHistory, setCubeHistory] = useState<CubeHistory[]>();
-  const [cubeStatement, setCubeStatement] = useState<CubeStatement>();
+  const [cubeStatements, setCubeStatements] = useState<CubeStatements>();
   const [startDate, setStartDate] = useState<Date>(new Date("2024-01-25"));
   const [endDate, setEndDate] = useState<Date>(new Date());
   const [totalPrice, setTotalPrice] = useState<string>();
@@ -38,7 +40,6 @@ const Cube = () => {
 
           return historyResult;
         });
-
         const result = await Promise.all(resultPromises);
         const flattenedResult = result.flat();
 
@@ -58,7 +59,7 @@ const Cube = () => {
 
   useEffect(() => {
     if (cubeHistory) {
-      const statement: CubeStatement = {
+      const statement: CubeStatements = {
         레어: {
           potentialOption: { count: 0, success: 0 },
           additionalOption: { count: 0, success: 0 },
@@ -130,33 +131,11 @@ const Cube = () => {
       });
       const formattedUsagePrice = formatNumber(usagePrice);
       setTotalPrice(formattedUsagePrice);
-      setCubeStatement(statement);
+      setCubeStatements(statement);
       setEquipList(neweEuipList);
       setCharacterList(newCharacterList);
     }
   }, [cubeHistory]);
-
-  const formatNumber = (num: number) => {
-    const trillion = Math.floor(num / 1000000000000);
-    const oneHunderedMillion = Math.floor((num % 1000000000000) / 100000000);
-    const tenThousand = Math.floor((num % 100000000) / 10000);
-
-    let result = "";
-
-    if (trillion > 0) {
-      result += `${trillion}조 `;
-    }
-
-    if (oneHunderedMillion > 0) {
-      result += `${oneHunderedMillion}억 `;
-    }
-
-    if (tenThousand > 0) {
-      result += `${tenThousand}만 `;
-    }
-
-    return result;
-  };
 
   const handleStartDateChange = (date: Date) => {
     setStartDate(date);
@@ -166,85 +145,17 @@ const Cube = () => {
     setEndDate(date);
   };
 
-  console.log(cubeHistory);
-  // console.log(cubeStatement);
-
   return (
     <div className="grow shrink-0 max-w-[1120px] mx-auto w-full p-2 bg-dark-250">
       <div className="flex flex-col gap-y-2 ">
         <CubeMainChar cubeHistory={cubeHistory} />
-        {cubeHistory && cubeStatement && (
-          <div className="grid grid-cols-1  md:grid-cols-[250px_1fr] gap-x-2">
-            <div className="grow-0 shrink-0 basis-[250px]">
-              <div className="flex flex-col gap-y-2">
-                <div className="flex flex-col text-center bg-dark-50 rounded-sm">
-                  <div>재설정 횟수</div>
-                  <div>{cubeHistory.length}</div>
-                </div>
-                <div className="flex flex-col text-center bg-dark-50 rounded-sm">
-                  <div>누적 사용 메소</div>
-                  <div>{totalPrice}</div>
-                </div>
-                <div className="flex flex-col py-1 bg-dark-50 rounded-sm">
-                  <div className="pl-2 py-1">잠재설정</div>
-                  <table className="flex flex-col text-[14px] text-center">
-                    <thead className="bg-dark-200">
-                      <tr className="flex pl-2">
-                        <td className="flex-1 text-start">등급</td>
-                        <td className="flex-1">재설정 횟수</td>
-                        <td className="flex-1">등급업 횟수</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {Object.entries(cubeStatement).map(([key, value]) => (
-                        <tr key={key} className="flex">
-                          <td className="flex-1 text-start pl-2">{key}</td>
-                          <td className="flex-1">{`${
-                            value.potentialOption.count === 0
-                              ? "-"
-                              : value.potentialOption.count
-                          }`}</td>
-                          <td className="flex-1">{`${
-                            value.potentialOption.success === 0
-                              ? "-"
-                              : value.potentialOption.success
-                          }`}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <div className="flex flex-col py-1 bg-dark-50 rounded-sm">
-                  <div className="pl-2 py-1">에디셔널 잠재설정</div>
-                  <table className="flex flex-col text-[14px] text-center">
-                    <thead className="bg-dark-200">
-                      <tr className="flex">
-                        <td className="flex-1 text-start pl-2">등급</td>
-                        <td className="flex-1">재설정 횟수</td>
-                        <td className="flex-1">등급업 횟수</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {Object.entries(cubeStatement).map(([key, value]) => (
-                        <tr key={key} className="flex">
-                          <td className="flex-1 text-start pl-2">{key}</td>
-                          <td className="flex-1">{`${
-                            value.additionalOption.count === 0
-                              ? "-"
-                              : value.additionalOption.count
-                          }`}</td>
-                          <td className="flex-1">{`${
-                            value.additionalOption.success === 0
-                              ? "-"
-                              : value.additionalOption.success
-                          }`}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+        {cubeHistory && cubeStatements && (
+          <div className="grid grid-cols-1  md:grid-cols-[250px_1fr] gap-x-2 gap-y-2">
+            <CubeStatement
+              cubeHistory={cubeHistory}
+              cubeStatements={cubeStatements}
+              totalPrice={totalPrice}
+            />
             <CubeResultList
               cubeHistory={cubeHistory}
               startDate={startDate}

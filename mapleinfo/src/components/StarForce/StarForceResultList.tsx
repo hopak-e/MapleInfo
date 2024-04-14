@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { StarForceHistory } from "types/starforce";
-import formatDate from "utils/formatDate";
+import formatDate from "utils/dateUtils/formatDate";
 import useOutsideClick from "hooks/useOutsideClick";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.module.css";

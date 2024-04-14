@@ -1,9 +1,7 @@
 import { EquipmentPreset } from "types/char";
 import StarCountDisplay from "./StarCountDisplay";
-import Rare from "assets/rare.png";
-import Epic from "assets/epic.png";
-import Unique from "assets/unique.png";
-import Legendary from "assets/legendary.png";
+import getPotentialImg from "utils/styleUtils/getPotentialImg";
+import gradeTextStyle from "utils/styleUtils/gradeTextStyle";
 
 interface CurrentItemProps {
   currentItem: EquipmentPreset;
@@ -89,19 +87,6 @@ const CharCurrentItem = ({ currentItem }: CurrentItemProps) => {
     );
   };
 
-  const getPotentialImg = (potential: string) => {
-    if (potential === "레전드리")
-      return (
-        <img src={Legendary} alt="레전드리" className="w-[12px] h-[12px]" />
-      );
-    if (potential === "유니크")
-      return <img src={Unique} alt="유니크" className="w-[12px] h-[12px]" />;
-    if (potential === "에픽")
-      return <img src={Epic} alt="에픽" className="w-[12px] h-[12px]" />;
-    if (potential === "레어")
-      return <img src={Rare} alt="레어" className="w-[12px] h-[12px]" />;
-  };
-
   return (
     <div>
       <div className="text-center text-xs w-[240px] dark:bg-dark-100 rounded-sm border border-dark-100">
@@ -117,7 +102,7 @@ const CharCurrentItem = ({ currentItem }: CurrentItemProps) => {
               scrollFlag={currentItem.starforce_scroll_flag}
             />
           ) : null}
-          <div className="text-center text-[14px] font-[800]">
+          <div className="text-center text-[14px] font-[700]">
             {`${currentItem.item_name}${
               currentItem.scroll_upgrade && currentItem.scroll_upgrade !== "0"
                 ? `  (+${currentItem.scroll_upgrade})`
@@ -287,7 +272,9 @@ const CharCurrentItem = ({ currentItem }: CurrentItemProps) => {
               <div className="flex items-center gap-x-[2px] ">
                 {getPotentialImg(currentItem.potential_option_grade)}
                 <span
-                  className={`text-potential-${currentItem.potential_option_grade}`}
+                  className={`${gradeTextStyle(
+                    currentItem.potential_option_grade
+                  )}`}
                 >
                   잠재 옵션
                 </span>
@@ -304,7 +291,9 @@ const CharCurrentItem = ({ currentItem }: CurrentItemProps) => {
                     currentItem.additional_potential_option_grade
                   )}
                   <span
-                    className={`text-potentail-${currentItem.additional_potential_option_grade}`}
+                    className={`${gradeTextStyle(
+                      currentItem.additional_potential_option_grade
+                    )}`}
                   >
                     에디셔널 잠재 옵션
                   </span>

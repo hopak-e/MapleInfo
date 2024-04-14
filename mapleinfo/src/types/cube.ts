@@ -44,7 +44,7 @@ export interface CubeHistory {
   ];
 }
 
-export interface CubeStatement {
+export interface CubeStatements {
   [key: string]: {
     potentialOption: { count: number; success: number };
     additionalOption: { count: number; success: number };

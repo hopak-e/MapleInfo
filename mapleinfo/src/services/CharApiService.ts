@@ -11,11 +11,21 @@ import {
 } from "types/char";
 import { apiInstance } from "./base";
 
-const today = new Date();
-today.setDate(today.getDate() - 3);
-const formattedDate = `${today.getFullYear()}-${(today.getMonth() + 1)
-  .toString()
-  .padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
+const getCurrentDate = () => {
+  const currentDate = new Date();
+  const currentHour = currentDate.getHours();
+
+  if (currentHour <= 9) {
+    const twoDayAgo = new Date(currentDate);
+    twoDayAgo.setDate(twoDayAgo.getDate() - 2);
+    return twoDayAgo.toISOString().split("T")[0];
+  } else {
+    const oneDayAgo = new Date(currentDate);
+    oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+    return oneDayAgo.toISOString().split("T")[0];
+  }
+};
+const formattedDate = getCurrentDate();
 
 const CharApiService = {
   fetchOcidData: async (charName: string | undefined): Promise<string> => {

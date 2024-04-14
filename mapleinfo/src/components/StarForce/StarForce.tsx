@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import StarForceApiServices from "services/StarForceApiService";
-import formatDate from "utils/formatDate";
-import getDateRange from "utils/getDateRange";
+import formatDate from "utils/dateUtils/formatDate";
+import getDateRange from "utils/dateUtils/getDateRange";
 import { Statement, StarForceHistory } from "types/starforce";
 import StarForceMainChar from "./StarForceMainChar";
 import StarForceStatement from "./StarForceStatement";

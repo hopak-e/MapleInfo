@@ -50,7 +50,7 @@ const TrackedChar = () => {
               />
             </div>
             <div className="text-[11px]">{mainCharInfo.world_name}</div>
-            <div className="flex items-center gap-x-0.5 text-lg font-[800]">
+            <div className="flex items-center gap-x-0.5 text-lg font-[700]">
               <img
                 src={require(`assets/worldLogo/${mainCharInfo.world_name}.png`)}
                 alt={mainCharInfo.world_name}

@@ -1,6 +1,6 @@
 import GuildSearch from "./GuildSearch";
 import GuildSearchResult from "./GuildSearchResult";
-import GuildSuroRanking from "./GuilSuroRanking";
+import GuilFirstSuroOfWolrd from "./GuilFirstSuroOfWolrd";
 
 interface GuildProps {
   worldName: string | undefined;
@@ -14,7 +14,7 @@ const Guild = ({ worldName, guildName }: GuildProps) => {
       {guildName ? (
         <GuildSearchResult worldName={worldName} guildName={guildName} />
       ) : (
-        <GuildSuroRanking />
+        <GuilFirstSuroOfWolrd />
       )}
     </div>
   );
