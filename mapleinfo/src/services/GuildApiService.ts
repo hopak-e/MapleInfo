@@ -1,15 +1,18 @@
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { apiInstance } from "./base";
 import { Guild, GuildRanking } from "types/guild";
 const GuildApiService = {
   fetchRankingData: async (
     date: string,
-    worldName: string,
     rankingType: number,
+    worldName?: string,
     guildName?: string
   ): Promise<GuildRanking> => {
     try {
-      let endpoint = `/ranking/guild?date=${date}&world_name=${worldName}&ranking_type=${rankingType}`;
+      let endpoint = `/ranking/guild?date=${date}&ranking_type=${rankingType}`;
+      if (worldName) {
+        endpoint += `&world_name=${worldName}`;
+      }
       if (guildName) {
         endpoint += `&guild_name=${guildName}`;
       }
