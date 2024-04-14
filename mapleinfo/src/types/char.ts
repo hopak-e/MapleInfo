@@ -391,3 +391,7 @@ export interface Skill {
   skill_effect: string;
   skill_icon: string;
 }
+
+export interface ListOfFavorite {
+  charName: string;
+}

@@ -86,7 +86,7 @@ const CharStat = ({ stat, ocid }: StatProps) => {
   return (
     <div className="flex flex-wrap text-sm gay-y-3 gap-x-2">
       <div className="basis-full sm:basis-1/2 md:basis-full max-w-[280px] mx-auto">
-        <div className="font-[800] px-1 pb-2 text-lg">스탯</div>
+        <div className="font-[700] px-1 pb-2 text-lg">스탯</div>
         <div className="space-y-0.5 pb-2 border-b-[0.5px]">
           <StatItem stat={stat} index={42} />
           <div className="flex items-center justify-between px-1 rounded-sm">
@@ -127,7 +127,7 @@ const CharStat = ({ stat, ocid }: StatProps) => {
             <span>{stat[28].stat_value}%</span>
           </div>
         </div>
-        <div className="font-[800] px-1 mt-6 text-lg">하이퍼 스탯</div>
+        <div className="font-[700] px-1 mt-6 text-lg">하이퍼 스탯</div>
         <div className="flex py-2 gap-x-2">
           {[1, 2, 3].map((num) => (
             <PresetButton
@@ -149,7 +149,7 @@ const CharStat = ({ stat, ocid }: StatProps) => {
               </li>
             ))}
         </ul>
-        <div className="font-[800] px-1 mt-6 text-lg">어빌리티</div>
+        <div className="font-[700] px-1 mt-6 text-lg">어빌리티</div>
         <div className="flex py-2 gap-x-2">
           {[1, 2, 3].map((num) => (
             <PresetButton

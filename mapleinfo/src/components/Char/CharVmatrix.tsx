@@ -24,7 +24,7 @@ const CharVmatrix = ({ ocid }: CharVMatrixProps) => {
   return (
     <div className="bg-dark-200 rounded-sm">
       <div className="p-2">
-        <div className="font-[800]">5차</div>
+        <div className="font-[700]">5차</div>
         {vMatrix && (
           <div className="flex gap-x-2 pt-2 flex-wrap gap-y-2">
             {vMatrix.map((item) => (
@@ -39,11 +39,11 @@ const CharVmatrix = ({ ocid }: CharVMatrixProps) => {
                 <div className="flex items-center justify-center w-[46px] h-[46px]">
                   <img src={item.skill_icon} alt={item.skill_name} />
                 </div>
-                <div className="text-center font-[800]">{item.skill_level}</div>
+                <div className="text-center font-[700]">{item.skill_level}</div>
                 {hoveredSkill === item && (
                   <div className="absolute top-0 left-[50%] z-10 -translate-x-[50%] -translate-y-[105%] p-1 rounded-md w-[380px] border border-dark-100 dark:border-white bg-dark-100">
                     <div className="flex flex-col text-[11px] leading-[1.35em]">
-                      <div className="text-[16px] text-center font-[800] py-2">
+                      <div className="text-[16px] text-center font-[700] py-2">
                         {item.skill_name}
                       </div>
                       <div className="relative flex justify-between gap-x-2 font-[400] pb-3 border-b border-dark-150 border-dashed">
