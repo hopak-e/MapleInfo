@@ -18,11 +18,11 @@ const CharInventory = ({ selectedPresetEquipment }: SelectedEquipProps) => {
     );
 
   const gradeBorderStyles: { [key: string]: string } = {
-    레전드리: "border border-grade-50 bg-grade-250",
-    유니크: "border border-grade-100 bg-grade-300",
-    에픽: "border border-grade-150 bg-grade-350",
-    레어: "border border-grade-200 bg-grade-400",
-    default: "border",
+    레전드리: "border border-grade-50 bg-grade-450 dark:bg-grade-250",
+    유니크: "border border-grade-100 bg-grade-500 dark:bg-grade-300",
+    에픽: "border border-grade-150 bg-grade-550 dark:bg-grade-350",
+    레어: "border border-grade-200 bg-grade-600 dark:bg-grade-400",
+    default: "border border-dark-50 dark:border-dark-150",
   };
   const getBorderStyle = (potentialOptionGrade: string | undefined) => {
     return gradeBorderStyles[potentialOptionGrade || "default"];

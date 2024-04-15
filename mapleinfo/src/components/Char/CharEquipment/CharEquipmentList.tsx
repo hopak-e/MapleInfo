@@ -102,7 +102,7 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
           (item, index) =>
             item && (
               <div
-                className="relative text-sm py-1 cursor-pointer bg-dark-50 rounded-md"
+                className="relative text-sm py-1 cursor-pointer border-[0.5px] border-dark-150 dark:border-none dark:bg-dark-50 shadow-sm rounded-md"
                 key={item.item_equipment_slot}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
@@ -142,7 +142,7 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
                           item.item_equipment_slot,
                           item.item_base_option?.base_equipment_level
                         ) && (
-                          <div className="flex items-center text-potential-200 text-[10px] font-[700]">
+                          <div className="flex items-center text-potential-400 dark:text-potential-200 text-[10px] font-[700]">
                             {`${calculateMainAddOption(
                               item.item_add_option,
                               item.item_equipment_slot,
@@ -166,7 +166,7 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
                         }
                       >
                         {item.potential_option_1 && (
-                          <span className="pr-1 dark:text-white">잠재</span>
+                          <span className="pr-1 text-dark-200">잠재</span>
                         )}
                         <span>
                           {item.potential_option_1
@@ -193,7 +193,7 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
                         }
                       >
                         {item.additional_potential_option_1 && (
-                          <span className="pr-1 dark:text-white">에디</span>
+                          <span className="pr-1 text-dark-200">에디</span>
                         )}
                         <span>
                           {item.additional_potential_option_1

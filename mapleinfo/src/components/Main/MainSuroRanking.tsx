@@ -35,7 +35,7 @@ const MainSuroRanking = () => {
   }, []);
 
   return (
-    <div className="flex flex-col dark:bg-dark-250 gap-y-0.5 p-2 rounded-md">
+    <div className="flex flex-col border border-dark-150 dark:border-none dark:bg-dark-250 gap-y-0.5 p-2 rounded-md">
       <div className="pl-1 py-1 border-b-[0.5px]">길드 수로 랭킹</div>
       <div className="flex flex-col gap-y-2 text-[12px] pt-1">
         {suroRank &&
@@ -43,7 +43,7 @@ const MainSuroRanking = () => {
             <Link to={`/guildDetail/${guild.world_name}/${guild.guild_name}`}>
               <div
                 key={guild.ranking}
-                className="grid grid-cols-[1.4em_auto_1fr_auto] items-center gap-x-0.5 hover:bg-dark-200 cursor-pointer"
+                className="grid grid-cols-[1.4em_auto_1fr_auto] items-center gap-x-0.5 hover:bg-dark-300 dark:hover:bg-dark-200 cursor-pointer"
               >
                 <div className="text-center">{guild.ranking}</div>
                 <div className="flex items-center gap-x-1">

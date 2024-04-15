@@ -5,7 +5,7 @@ interface TabState {
 }
 
 const initialState: TabState = {
-  tab: "메인",
+  tab: "",
 };
 
 const tabSlice = createSlice({

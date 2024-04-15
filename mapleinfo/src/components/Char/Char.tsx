@@ -7,16 +7,17 @@ import CharStat from "./CharStat";
 import CharEquipment from "./CharEquipment/CharEquipment";
 import CharVmatrix from "./CharVmatrix";
 import CharHexaMatrix from "./CharHexaMatrix";
-import { CharBasicData, ListOfFavorite } from "types/char";
+import { CharBasicData } from "types/char";
+import { ListOfFavorite } from "types/favorite";
 import { GuilImg } from "types/guild";
 import Star from "assets/star.svg";
 import GrayStar from "assets/graystar.svg";
 
 interface CharProps {
-  value: string | undefined;
+  nickName: string | undefined;
 }
 
-const Char = ({ value }: CharProps) => {
+const Char = ({ nickName }: CharProps) => {
   const [ocid, setOcid] = useState<string>("");
   const [charBasicData, setCharBasicData] = useState<CharBasicData>();
   const [guildImgUrl, setGuildImgUrl] = useState<GuilImg>();
@@ -28,15 +29,15 @@ const Char = ({ value }: CharProps) => {
     if (favorites) {
       const listOfFavorites: ListOfFavorite[] = JSON.parse(favorites);
       setFavorites(listOfFavorites);
-      if (listOfFavorites.find((list) => list.charName === value))
+      if (listOfFavorites.find((list) => list.charName === nickName))
         setIsFavorite(true);
     }
-  }, [value]);
+  }, [nickName]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const ocid: string = await CharApiService.fetchOcidData(value);
+        const ocid: string = await CharApiService.fetchOcidData(nickName);
         setOcid(ocid);
         const basicData: CharBasicData =
           await CharApiService.fetchBasicCharacterData(ocid);
@@ -57,13 +58,13 @@ const Char = ({ value }: CharProps) => {
       }
     };
     fetchData();
-  }, [value]);
+  }, [nickName]);
 
   const handleFavoriteClick = () => {
     if (favorites) {
       if (isFavorite) {
         const filteredData = favorites.filter(
-          (item) => item.charName !== value
+          (item) => item.charName !== nickName
         );
         localStorage.setItem("listOfFavorite", JSON.stringify(filteredData));
         setIsFavorite(false);
@@ -71,8 +72,8 @@ const Char = ({ value }: CharProps) => {
       } else {
         if (favorites.length >= 5) {
           alert("즐겨찾기는 최대 5명까지만 가능합니다");
-        } else if (value) {
-          const newData = { charName: value };
+        } else if (nickName) {
+          const newData = { charName: nickName };
           const data = [...favorites, newData];
           localStorage.setItem("listOfFavorite", JSON.stringify(data));
           setIsFavorite(true);
@@ -80,8 +81,8 @@ const Char = ({ value }: CharProps) => {
         }
       }
     } else {
-      if (value) {
-        const newFavorite = [{ charName: value }];
+      if (nickName) {
+        const newFavorite = [{ charName: nickName }];
         localStorage.setItem("listOfFavorite", JSON.stringify(newFavorite));
         setIsFavorite(true);
         setFavorites(newFavorite);
@@ -94,9 +95,9 @@ const Char = ({ value }: CharProps) => {
       {charBasicData && (
         <div className="grid grid-cols-1 gap-3 w-full md:grid-cols-[250px_1fr]">
           <div className="grow-0 shrink-0 basis-[250px] space-y-3 ">
-            <div className="bg-dark-200 text-white rounded-sm shadow-sm">
+            <div className="dark:bg-dark-200 border-[0.5px] border-dark-150 dark:border-none rounded-sm shadow-md">
               <div className="relative flex w-full items-center justify-center flex-wrap pt-5 gap-x-2 sm:gap-x-8 md:gap-x-0">
-                <div className="absolute top-2 left-2 p-1 border-[0.5px] rounded-md cursor-pointer hover:bg-dark-250">
+                <div className="absolute top-2 left-2 p-1 border rounded-md cursor-pointer hover:bg-dark-250">
                   <img
                     src={isFavorite ? Star : GrayStar}
                     alt="favorite"
@@ -114,7 +115,7 @@ const Char = ({ value }: CharProps) => {
                 />
               </div>
             </div>
-            <div className="bg-dark-200 text-white rounded-sm shadow-sm p-2">
+            <div className="border-[0.5px] border-dark-150 dark:border-none dark:bg-dark-200 rounded-sm shadow-sm p-2">
               <CharStat stat={charBasicData.final_stat} ocid={ocid} />
             </div>
           </div>

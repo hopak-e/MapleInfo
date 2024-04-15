@@ -84,7 +84,7 @@ const GuilFirstSuroOfWolrd = () => {
                   to={`/guildDetail/${guild.world_name}/${guild.guild_name}`}
                 >
                   <div
-                    className=" min-w-[140px] px-3 py-2 rounded-sm bg-dark-200"
+                    className=" min-w-[140px] px-3 py-2 rounded-sm border border-dark-150 dark:border-none dark:bg-dark-200"
                     key={guild.guild_master_name}
                   >
                     <div className="flex items-center gap-x-1">

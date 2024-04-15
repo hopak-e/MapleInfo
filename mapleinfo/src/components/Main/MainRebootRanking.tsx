@@ -15,7 +15,7 @@ const MainReabootRanking = () => {
   }, []);
 
   return (
-    <div className="flex flex-col dark:bg-dark-250 gap-y-0.5 p-2 rounded-md">
+    <div className="flex flex-col border border-dark-150 dark:border-none dark:bg-dark-250 gap-y-0.5 p-2 rounded-md">
       <div className="pl-1 py-1 border-b-[0.5px]">리부트 월드 랭킹</div>
       <div className="flex flex-col gap-y-2 text-[12px] pt-1">
         {userRanking &&
@@ -23,7 +23,7 @@ const MainReabootRanking = () => {
             <Link to={`/char/${user.character_name}`}>
               <div
                 key={user.character_name}
-                className="grid grid-cols-[1.4em_auto_1fr_auto_auto] items-center hover:bg-dark-200 cursor-pointer gap-x-1"
+                className="grid grid-cols-[1.4em_auto_1fr_auto_auto] items-center hover:bg-dark-300 dark:hover:bg-dark-200 cursor-pointer gap-x-1"
               >
                 <div className="text-center">{user.ranking}</div>
                 <div className="flex items-center gap-x-1">

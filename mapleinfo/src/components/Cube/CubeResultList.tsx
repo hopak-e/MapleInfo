@@ -70,7 +70,7 @@ const CubeResultList = ({
   };
 
   return (
-    <div className="grow shrink bg-dark-50">
+    <div className="grow shrink shadow-md dark:shadow-none border-[0.5px] border-dark-150 dark:border-none dark:bg-dark-50">
       <div className="px-2 py-1">
         <div className="flex justify-between py-2 border-b">
           <div>{`재설정 내역 (${
@@ -90,7 +90,7 @@ const CubeResultList = ({
                   startDate={startDate}
                   dateFormat="yyyy-MM-dd"
                   placeholderText="시작일"
-                  className="w-[80px] border px-1 pt-1 pb-0.5 cursor-pointer rounded-md"
+                  className="w-[80px] shadow-md dark:shadow-none border-[0.5px] px-1 pt-1 pb-0.5 cursor-pointer rounded-md"
                 />
               </div>
               <div>
@@ -104,7 +104,7 @@ const CubeResultList = ({
                   minDate={startDate}
                   dateFormat="yyyy-MM-dd"
                   placeholderText="종료일"
-                  className="w-[80px] border px-1 pt-1 pb-0.5 cursor-pointer rounded-md"
+                  className="w-[80px] shadow-md dark:shadow-none border-[0.5px] px-1 pt-1 pb-0.5 cursor-pointer rounded-md"
                 />
               </div>
             </div>
@@ -113,18 +113,18 @@ const CubeResultList = ({
         <div className="flex gap-x-2 text-[12px] mt-3">
           <div
             ref={itemListRef}
-            className="relative flex items-center gap-x-2 px-2 py-1 border rounded-sm cursor-pointer bg-dark-200"
+            className="relative flex items-center gap-x-2 px-2 py-1 rounded-sm cursor-pointer shadow-md dark:shadow-none border-[0.5px] border-dark-150 dark:border-none dark:bg-dark-200"
             onClick={() => setIsItemListOpen(!isItemListOpen)}
           >
             <button>{selectedItem}</button>
             <img src={DownArrow} alt="downarrow" className="w-4 h-4" />
             {isItemListOpen && (
-              <ul className="absolute w-[160px] max-h-[200px] top-[100%] left-[-10%] overflow-y-auto z-10 bg-dark-200">
+              <ul className="absolute w-[160px] max-h-[200px] top-[100%] left-[-10%] overflow-y-auto z-10 shadow-md dark:shadow-none border-[0.5px] border-dark-150 dark:border-none bg-white dark:bg-dark-200">
                 {equipList &&
                   equipList.map((item, index) => (
                     <li
                       key={index}
-                      className="py-1 pl-2 hover:bg-dark-150"
+                      className="py-1 pl-2 hover:bg-dark-300 dark:hover:bg-dark-150"
                       onClick={() => handleItemListClick(item)}
                     >
                       {item}
@@ -135,18 +135,18 @@ const CubeResultList = ({
           </div>
           <div
             ref={characterListRef}
-            className="relative flex items-center gap-x-2 px-2 py-1 border rounded-sm cursor-pointer bg-dark-200"
+            className="relative flex items-center gap-x-2 px-2 py-1 rounded-sm cursor-pointer shadow-md dark:shadow-none border-[0.5px] border-dark-150 dark:border-none dark:bg-dark-200"
             onClick={() => setIsCharacterListOpen(!isCharacterListOpen)}
           >
             <button>{selectedCharacter}</button>
             <img src={DownArrow} alt="downarrow" className="w-4 h-4" />
             {isCharacterListOpen && (
-              <ul className="absolute w-[160px] max-h-[200px] top-[100%] left-[-10%] overflow-y-auto z-10 bg-dark-200">
+              <ul className="absolute w-[160px] max-h-[200px] top-[100%] left-[-10%] overflow-y-auto z-10 shadow-md dark:shadow-none border-[0.5px] border-dark-150 dark:border-none bg-white dark:bg-dark-200">
                 {characterList &&
                   characterList.map((char, index) => (
                     <li
                       key={index}
-                      className="py-1 pl-2 hover:bg-dark-150"
+                      className="py-1 pl-2 hover:bg-dark-300 dark:hover:bg-dark-150"
                       onClick={() => handleCharacterListClick(char)}
                     >
                       {char}
@@ -163,8 +163,8 @@ const CubeResultList = ({
                 key={history.id}
                 className={`grid grid-cols-[auto_1fr_1fr_auto] items-center p-2 ${
                   history.item_upgrade_result === "성공" &&
-                  "bg-starforce-success"
-                } bg-dark-200 gap-x-1`}
+                  "bg-starforceresult-200 dark:bg-starforceresult-50"
+                } dark:bg-dark-200 gap-x-1 shadow-md dark:shadow-none border-[0.5px] border-dark-150 dark:border-none`}
               >
                 <div className="">
                   <div>{history.potential_type}</div>

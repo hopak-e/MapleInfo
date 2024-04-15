@@ -89,7 +89,7 @@ const CharCurrentItem = ({ currentItem }: CurrentItemProps) => {
 
   return (
     <div>
-      <div className="text-center text-xs w-[240px] dark:bg-dark-100 rounded-sm border border-dark-100">
+      <div className="text-center text-xs w-[240px] text-white bg-dark-100 rounded-md border border-dark-100">
         <div className="flex flex-col py-2 gap-y-1">
           {currentItem.starforce &&
           currentItem.item_base_option &&

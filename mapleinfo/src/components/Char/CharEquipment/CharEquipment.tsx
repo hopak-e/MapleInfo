@@ -82,8 +82,8 @@ const CharEquipment = ({ ocid, charClass }: CharEquipmentProps) => {
 
   return (
     <div className="grow shrink space-y-3">
-      <div className="w-full rounded-sm bg-dark-200 p-2">
-        <div className="flex justify-between w-full pt-1 pb-3">
+      <div className="p-2 rounded-sm border-[0.5px] border-dark-150 dark:border-none dark:bg-dark-200 shadow-md">
+        <div className="flex justify-between pt-1 pb-3">
           <div className="flex gap-x-2">
             {[1, 2, 3].map((num) => (
               <PresetButton
@@ -97,7 +97,9 @@ const CharEquipment = ({ ocid, charClass }: CharEquipmentProps) => {
           <div className="flex text-xs gap-x-2 pr-2">
             <button
               className={`w-14 py-1 rounded-full ${
-                listUpType === "목록" ? "bg-dark-50" : "bg-dark-150"
+                listUpType === "목록"
+                  ? "bg-dark-150 dark:bg-dark-50"
+                  : "bg-dark-300 dark:bg-dark-150"
               }`}
               onClick={() => handleListUpTypeButtonClick("목록")}
             >
@@ -105,7 +107,9 @@ const CharEquipment = ({ ocid, charClass }: CharEquipmentProps) => {
             </button>
             <button
               className={`w-14 py-1 rounded-full ${
-                listUpType === "장비창" ? "bg-dark-50" : "bg-dark-150"
+                listUpType === "장비창"
+                  ? "bg-dark-150 dark:bg-dark-50"
+                  : "bg-dark-300 dark:bg-dark-150"
               }`}
               onClick={() => handleListUpTypeButtonClick("장비창")}
             >

@@ -23,14 +23,14 @@ const CharHexaMatrix = ({ ocid }: CharHexaMatrixProps) => {
   }, [ocid]);
 
   return (
-    <div className="bg-dark-200 rounded-sm">
+    <div className="border border-dark-150 dark:border-none dark:bg-dark-200 shadow-md rounded-sm">
       <div className="p-2">
         <div className="font-[700]">6차</div>
         {hexaMatrix && (
           <div className="flex gap-x-2 pt-2">
             {hexaMatrix.map((item) => (
               <div
-                className="relative cursor-pointer bg-dark-100 rounded-md"
+                className="relative cursor-pointer border border-dark-150 dark:border-none dark:bg-dark-100 shadow-sm rounded-md"
                 key={item.skill_name}
                 onMouseEnter={() => setHoveredSkill(item)}
                 onMouseLeave={() => setHoveredSkill(null)}

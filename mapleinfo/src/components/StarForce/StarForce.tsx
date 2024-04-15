@@ -133,7 +133,7 @@ const StarForce = () => {
   };
 
   return (
-    <div className="grow shrink-0 max-w-[1120px] mx-auto w-full p-2 bg-dark-250">
+    <div className="grow shrink-0 max-w-[1120px] mx-auto w-full p-2 dark:bg-dark-250">
       <div className="flex flex-col gap-y-2 ">
         <StarForceMainChar starForceHistory={starForceHistory} />
         {starForceHistory && starForceStatement && (

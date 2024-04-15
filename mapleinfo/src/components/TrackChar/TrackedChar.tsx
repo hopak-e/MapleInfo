@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
-import TrackCharInput from "./TrackCharInput";
-import TrackChar from "./TrackChar";
 import { CharBasicData } from "types/char";
 import CharApiService from "services/CharApiService";
-import { Link, useParams } from "react-router-dom";
-
-const TrackedChar = () => {
-  const { nickName } = useParams<string>();
+import { Link } from "react-router-dom";
+interface TrackedCharProps {
+  nickName?: string;
+}
+const TrackedChar = ({ nickName }: TrackedCharProps) => {
   const [mainCharInfo, setMainCharInfo] = useState<CharBasicData>();
-  //유니온 랭킹 조회 검색 2023-12-21기준
-  //부캐 ocid
-  //나온 본캐 기본정보 img 월드 닉네임 레벨 길드 유니온
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,16 +29,14 @@ const TrackedChar = () => {
       }
     };
     fetchData();
-  }, []);
-  console.log(mainCharInfo);
+  }, [nickName]);
 
   return (
-    <div className="max-w-[1120px] mx-auto">
-      <TrackChar />
+    <div>
       <div className="border-t pt-5">{`${nickName}의 본캐 찾기 결과`}</div>
       {mainCharInfo && (
         <Link to={`/char/${mainCharInfo.character_name}`}>
-          <div className="flex flex-col items-center bg-dark-250 py-2 cursor-pointer">
+          <div className="flex flex-col items-center py-2 border-[0.5px] border-dark-150 dark:border-none dark:bg-dark-250 shadow-md cursor-pointer">
             <div>
               <img
                 src={mainCharInfo.character_image}

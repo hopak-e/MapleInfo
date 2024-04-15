@@ -142,7 +142,7 @@ const CharStat = ({ stat, ocid }: StatProps) => {
           {filteredSelectedHyperStatPreset &&
             filteredSelectedHyperStatPreset.map((item, key) => (
               <li key={item.stat_type} className="flex items-center gap-x-2">
-                <span className="text-center bg-dark-150 p-[1.5px] w-9 rounded-md">
+                <span className="text-center bg-dark-300 dark:bg-dark-150 p-[1.5px] w-9 rounded-md">
                   Lv.{item.stat_level}
                 </span>
                 <span>{item.stat_increase}</span>

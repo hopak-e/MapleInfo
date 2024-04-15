@@ -14,18 +14,18 @@ const CubeStatement = ({
   return (
     <div className="grow-0 shrink-0 basis-[250px]">
       <div className="flex flex-col gap-y-2">
-        <div className="flex flex-col text-center bg-dark-50 rounded-sm py-1">
+        <div className="flex flex-col text-center border-[0.5px] border-dark-150 dark:border-none dark:bg-dark-50 shadow-md rounded-sm py-1">
           <div>재설정 횟수</div>
           <div>{cubeHistory.length}</div>
         </div>
-        <div className="flex flex-col text-center bg-dark-50 rounded-sm py-1">
+        <div className="flex flex-col text-center border-[0.5px] border-dark-150 dark:border-none dark:bg-dark-50 shadow-md rounded-sm py-1">
           <div>누적 사용 메소</div>
           <div>{totalPrice}</div>
         </div>
-        <div className="flex flex-col py-1 bg-dark-50 rounded-sm">
+        <div className="flex flex-col py-1 border-[0.5px] border-dark-150 dark:border-none dark:bg-dark-50 shadow-md rounded-sm">
           <div className="pl-2 py-1 text-[14px]  font-[700]">잠재설정</div>
           <table className="flex flex-col text-[12px] text-center">
-            <thead className="bg-dark-200">
+            <thead className="bg-dark-300 dark:bg-dark-200">
               <tr className="flex pl-2 py-1">
                 <td className="flex-1 text-start">등급</td>
                 <td className="flex-1">재설정 횟수</td>
@@ -51,12 +51,12 @@ const CubeStatement = ({
             </tbody>
           </table>
         </div>
-        <div className="flex flex-col py-1 bg-dark-50 rounded-sm">
+        <div className="flex flex-col py-1 border-[0.5px] border-dark-150 dark:border-none dark:bg-dark-50 shadow-md rounded-sm">
           <div className="pl-2 py-1 text-[14px] font-[700]">
             에디셔널 잠재설정
           </div>
           <table className="flex flex-col text-[12px] text-center">
-            <thead className="bg-dark-200">
+            <thead className="bg-dark-300 dark:bg-dark-200">
               <tr className="flex pl-2 py-1">
                 <td className="flex-1 text-start ">등급</td>
                 <td className="flex-1">재설정 횟수</td>

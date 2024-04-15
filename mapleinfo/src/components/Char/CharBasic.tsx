@@ -13,7 +13,7 @@ const CharBasic = ({ charBasicData, guildImgUrl }: CharBasicDataProps) => {
         {charBasicData.character_name}
       </div>
       <div className="flex justify-center text-sm">
-        <div className="flex items-center px-2 py-1 rounded-xl bg-dark-250">
+        <div className="flex items-center px-2 py-1 rounded-xl bg-dark-300 dark:bg-dark-250">
           <img
             src={require(`../../assets/worldLogo/${charBasicData.world_name}.png`)}
             alt={charBasicData.world_name}
@@ -21,7 +21,7 @@ const CharBasic = ({ charBasicData, guildImgUrl }: CharBasicDataProps) => {
           />
           <span>{charBasicData.world_name}</span>
         </div>
-        <div className="flex px-2 py-1 rounded-xl ml-2 bg-dark-250 items-center">
+        <div className="flex px-2 py-1 rounded-xl ml-2 bg-dark-300 dark:bg-dark-250 items-center">
           {guildImgUrl && (
             <img
               src={

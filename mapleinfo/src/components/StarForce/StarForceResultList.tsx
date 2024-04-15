@@ -68,8 +68,8 @@ const StarForceResultList = ({
   };
 
   return (
-    <div className="grow shrink">
-      <div className="flex items-center justify-between w-full">
+    <div className="grow shrink border-[0.5px] border-dark-150 dark:border-none dark:bg-dark-50 p-2 rounded-sm">
+      <div className="flex items-center justify-between w-full pb-2 border-b">
         <div>
           <span>강화내역</span>
           <span>{`(${
@@ -89,7 +89,7 @@ const StarForceResultList = ({
               startDate={startDate}
               dateFormat="yyyy-MM-dd"
               placeholderText="시작일"
-              className="w-[85px] border px-1 py-0.5 cursor-pointer"
+              className="w-[80px] border pl-1 pt-0.5 cursor-pointer rounded-md"
             />
           </div>
           <div>
@@ -103,26 +103,26 @@ const StarForceResultList = ({
               minDate={startDate}
               dateFormat="yyyy-MM-dd"
               placeholderText="종료일"
-              className="w-[85px] border px-1 py-0.5 cursor-pointer"
+              className="w-[80px] border pl-1 pt-0.5 cursor-pointer rounded-md"
             />
           </div>
         </div>
       </div>
-      <div className="flex gap-x-2 text-[12px]">
+      <div className="flex gap-x-2 text-[12px] mt-2">
         <div
           ref={itemListRef}
-          className="relative flex items-center gap-x-2 px-2 py-1 border rounded-sm cursor-pointer"
+          className="relative flex items-center gap-x-2 px-2 py-1 border rounded-sm shadow-md cursor-pointer dark:bg-dark-200"
           onClick={() => setIsItemListOpen(!isItemListOpen)}
         >
           <button>{selectedItem}</button>
           <img src={DownArrow} alt="downarrow" className="w-4 h-4" />
           {isItemListOpen && (
-            <ul className="absolute w-[160px] h-[200px] top-[100%] left-[-10%] overflow-y-auto z-10 bg-dark-200">
+            <ul className="absolute w-[160px] max-h-[200px] top-[100%] left-[-10%] overflow-y-auto z-10 border border-dark-150 dark:border-none bg-white dark:bg-dark-200 shadow-md">
               {itemList &&
                 itemList.map((item, index) => (
                   <li
                     key={index}
-                    className="py-1 pl-2 hover:bg-dark-150"
+                    className="py-1 pl-2 hover:bg-dark-300 dark:hover:bg-dark-150"
                     onClick={() => handleItemListClick(item)}
                   >
                     {item}
@@ -133,18 +133,18 @@ const StarForceResultList = ({
         </div>
         <div
           ref={characterListRef}
-          className="relative flex items-center gap-x-2 px-2 py-1 border rounded-sm cursor-pointer"
+          className="relative flex items-center gap-x-2 px-2 py-1 border rounded-sm shadow-md cursor-pointer dark:bg-dark-200"
           onClick={() => setIsCharacterListOpen(!isCharacterListOpen)}
         >
           <button>{selectedCharacter}</button>
           <img src={DownArrow} alt="downarrow" className="w-4 h-4" />
           {isCharacterListOpen && (
-            <ul className="absolute w-[160px] h-[200px] top-[100%] left-[-10%] overflow-y-auto z-10 bg-dark-200">
+            <ul className="absolute w-[160px] max-h-[200px] top-[100%] left-[-10%] overflow-y-auto z-10  border border-dark-150 dark:border-none bg-white dark:bg-dark-200 shadow-md">
               {characterList &&
                 characterList.map((char, index) => (
                   <li
                     key={index}
-                    className="py-1 pl-2 hover:bg-dark-150"
+                    className="py-1 pl-2 hover:bg-dark-300 dark:hover:bg-dark-150"
                     onClick={() => handleCharacterListClick(char)}
                   >
                     {char}
@@ -163,16 +163,16 @@ const StarForceResultList = ({
                   key={history.id}
                   className={`flex items-center p-2 ${
                     history.item_upgrade_result === "성공"
-                      ? "bg-starforce-success"
+                      ? "bg-starforceresult-200 dark:bg-starforceresult-50"
                       : history.item_upgrade_result === "파괴"
-                      ? "bg-starforce-destroyed"
-                      : "bg-starforce-failed"
-                  } bg-dark-200`}
+                      ? "bg-starforceresult-150"
+                      : "bg-starforceresult-250 dark:bg-starforceresult-100"
+                  } bg-dark-200 shadow-md`}
                 >
                   <div className="flex-1">
                     <div>{history.item_upgrade_result}</div>
                     <div className="text-[14px] md:text-[16px] font-[500]">{`${history.before_starforce_count} → ${history.after_starforce_count}`}</div>
-                    <div className="flex">
+                    <div className="flex gap-x-2">
                       {history.starcatch_result === "성공" && (
                         <div>스타캐치</div>
                       )}
@@ -200,7 +200,7 @@ const StarForceResultList = ({
           visibleCount < filteredStarForceHistory.length && (
             <button
               onClick={handleLoadMore}
-              className="cursor-pointer hover:bg-dark-150"
+              className="cursor-pointer hover:bg-dark-300 dark:hover:bg-dark-150"
             >
               더보기
             </button>
