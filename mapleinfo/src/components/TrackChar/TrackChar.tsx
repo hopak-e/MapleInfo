@@ -1,3 +1,4 @@
+import Favorite from "components/Favorite/Favorite";
 import TrackCharInput from "./TrackCharInput";
 
 const TrackChar = () => {
@@ -8,6 +9,7 @@ const TrackChar = () => {
         2023.12.21일 이후 접속한 캐릭터만 조회 가능합니다.
       </div>
       <TrackCharInput />
+      <Favorite path="trackChar" />
     </div>
   );
 };

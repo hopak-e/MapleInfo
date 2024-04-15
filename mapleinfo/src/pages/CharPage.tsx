@@ -1,12 +1,14 @@
+import Header from "components/Header/Header";
 import Char from "../components/Char/Char";
 import { useParams } from "react-router-dom";
 
 const CharPage = () => {
-  const { value } = useParams<{ value: string | undefined }>();
+  const { nickName } = useParams<{ nickName: string | undefined }>();
 
   return (
-    <div className="bg-dark-50">
-      <Char value={value} />
+    <div>
+      <Header defaultTab="" />
+      <Char nickName={nickName} />
     </div>
   );
 };
