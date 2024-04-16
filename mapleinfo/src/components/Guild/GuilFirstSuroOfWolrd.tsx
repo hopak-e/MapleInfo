@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import GuildApiService from "services/GuildApiService";
 import { Guild } from "types/guild";
 import { worldTypes } from "./constants";
+import Loading from "components/Loading/Loading";
 
 const GuilFirstSuroOfWolrd = () => {
   const [worldSuro, setWorldSuro] = useState<Guild[]>();
@@ -71,6 +72,7 @@ const GuilFirstSuroOfWolrd = () => {
     fetchData();
   }, [sundayDate]);
 
+  if (!worldSuro) return <Loading />;
   return (
     <div className="flex flex-col">
       <div className="text-lg font-[600]">월드별 수로 1등 길드</div>

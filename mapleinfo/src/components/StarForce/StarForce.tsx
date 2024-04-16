@@ -6,6 +6,7 @@ import { Statement, StarForceHistory } from "types/starforce";
 import StarForceMainChar from "./StarForceMainChar";
 import StarForceStatement from "./StarForceStatement";
 import StarForceResultList from "./StarForceResultList";
+import Loading from "components/Loading/Loading";
 
 const StarForce = () => {
   const [starForceHistory, setStarForceHistory] =
@@ -136,7 +137,7 @@ const StarForce = () => {
     <div className="grow shrink-0 max-w-[1120px] mx-auto w-full p-2 dark:bg-dark-250">
       <div className="flex flex-col gap-y-2 ">
         <StarForceMainChar starForceHistory={starForceHistory} />
-        {starForceHistory && starForceStatement && (
+        {starForceHistory && starForceStatement ? (
           <div className="grid grid-cols-1  md:grid-cols-[250px_1fr] gap-x-2">
             <StarForceStatement
               starForceHistory={starForceHistory}
@@ -152,6 +153,8 @@ const StarForce = () => {
               handleEndDateChange={handleEndDateChange}
             />
           </div>
+        ) : (
+          <Loading />
         )}
       </div>
     </div>

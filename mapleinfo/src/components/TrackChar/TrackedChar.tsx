@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { CharBasicData } from "types/char";
 import CharApiService from "services/CharApiService";
 import { Link } from "react-router-dom";
+import Loading from "components/Loading/Loading";
+import Error from "components/Error/Error";
 interface TrackedCharProps {
   nickName?: string;
 }
 const TrackedChar = ({ nickName }: TrackedCharProps) => {
   const [mainCharInfo, setMainCharInfo] = useState<CharBasicData>();
-
+  const [error, setError] = useState<string | null>(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,18 +25,22 @@ const TrackedChar = ({ nickName }: TrackedCharProps) => {
             mainCharOcid
           );
           setMainCharInfo(mainCharData);
+          setError(null);
         }
       } catch (error) {
         console.error("fetching error");
+        setError("캐릭터 이름을 다시 한 번 확인해주세요.");
       }
     };
     fetchData();
   }, [nickName]);
-
+  console.log(error);
   return (
     <div>
       <div className="border-t pt-5">{`${nickName}의 본캐 찾기 결과`}</div>
-      {mainCharInfo && (
+      {error ? (
+        <Error state={error} />
+      ) : mainCharInfo ? (
         <Link to={`/char/${mainCharInfo.character_name}`}>
           <div className="flex flex-col items-center py-2 border-[0.5px] border-dark-150 dark:border-none dark:bg-dark-250 shadow-md cursor-pointer">
             <div>
@@ -61,6 +67,8 @@ const TrackedChar = ({ nickName }: TrackedCharProps) => {
             <div>{`유니온 ${mainCharInfo.union_level}`}</div>
           </div>
         </Link>
+      ) : (
+        <Loading />
       )}
     </div>
   );

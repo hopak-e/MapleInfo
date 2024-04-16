@@ -8,6 +8,7 @@ import CubeMainChar from "./CubeMainChar";
 import CubeResultList from "./CubeResultList";
 import CubeStatement from "./CubeStatement";
 import formatNumber from "utils/formatNumber";
+import Loading from "components/Loading/Loading";
 
 const Cube = () => {
   const [cubeHistory, setCubeHistory] = useState<CubeHistory[]>();
@@ -146,10 +147,10 @@ const Cube = () => {
   };
 
   return (
-    <div className="grow shrink-0 max-w-[1120px] mx-auto w-full p-2 dark:bg-dark-250">
+    <div className="grow shrink-0 max-w-[1120px] mx-auto p-2 dark:bg-dark-250">
       <div className="flex flex-col gap-y-2 ">
         <CubeMainChar cubeHistory={cubeHistory} />
-        {cubeHistory && cubeStatements && (
+        {cubeHistory && cubeStatements ? (
           <div className="grid grid-cols-1  md:grid-cols-[250px_1fr] gap-x-2 gap-y-2">
             <CubeStatement
               cubeHistory={cubeHistory}
@@ -166,6 +167,8 @@ const Cube = () => {
               handleEndDateChange={handleEndDateChange}
             />
           </div>
+        ) : (
+          <Loading />
         )}
       </div>
     </div>

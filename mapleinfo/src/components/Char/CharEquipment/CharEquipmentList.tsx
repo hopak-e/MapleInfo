@@ -166,7 +166,7 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
                         }
                       >
                         {item.potential_option_1 && (
-                          <span className="pr-1 text-dark-200">잠재</span>
+                          <span className="pr-1">잠재</span>
                         )}
                         <span>
                           {item.potential_option_1
@@ -193,7 +193,7 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
                         }
                       >
                         {item.additional_potential_option_1 && (
-                          <span className="pr-1 text-dark-200">에디</span>
+                          <span className="pr-1">에디</span>
                         )}
                         <span>
                           {item.additional_potential_option_1

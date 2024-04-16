@@ -6,6 +6,7 @@ import GuildInput from "../Guild/GuildInput";
 import CharApiService from "services/CharApiService";
 import Crown from "assets/crown.svg";
 import formatDate from "utils/dateUtils/formatDate";
+import Loading from "components/Loading/Loading";
 
 interface GuildDetailProps {
   worldName?: string;
@@ -122,10 +123,11 @@ const GuildDetail = ({ worldName, guildName }: GuildDetailProps) => {
     fetchData();
   }, [worldName, guildName, formattedDate]);
 
+  // if (!guildData) return ;
   return (
     <div className="flex flex-col items-center py-2 gap-y-1 dark:text-white">
       <GuildInput worldName={worldName} guildName={guildName} />
-      {guildData && (
+      {guildData ? (
         <div className="flex flex-col">
           <div className="flex items-center gap-x-1 mt-2">
             <img
@@ -251,6 +253,8 @@ const GuildDetail = ({ worldName, guildName }: GuildDetailProps) => {
               )}
           </div>
         </div>
+      ) : (
+        <Loading />
       )}
     </div>
   );

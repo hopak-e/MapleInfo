@@ -5,9 +5,6 @@ import { Link } from "react-router-dom";
 import { ReactComponent as DarkMode } from "assets/darkmode.svg";
 import { ReactComponent as LightMode } from "assets/lightmode.svg";
 import SearchInput from "../inputs/SearchInput";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleTab } from "modules/tabSlice";
-import { RootState } from "modules/index";
 
 interface HeaderProps {
   defaultTab?: string;
@@ -21,7 +18,6 @@ interface TabList {
 const Header = ({ defaultTab }: HeaderProps) => {
   const [isDark, onToggleDarkMode]: useDark = useDarkMode();
   const [tab, onToggleTab]: useTab = useTabBtn();
-  const dispatch = useDispatch();
 
   const tabList: TabList[] = [
     { id: 0, name: "메인", link: "/" },
@@ -40,10 +36,10 @@ const Header = ({ defaultTab }: HeaderProps) => {
   }, [isDark]);
 
   useEffect(() => {
-    if (defaultTab) {
-      dispatch(toggleTab(defaultTab));
+    if (defaultTab !== undefined) {
+      onToggleTab(defaultTab);
     }
-  }, [defaultTab, dispatch]);
+  }, [defaultTab, onToggleTab]);
 
   return (
     <header className="dark:bg-dark-100 dark:text-white">

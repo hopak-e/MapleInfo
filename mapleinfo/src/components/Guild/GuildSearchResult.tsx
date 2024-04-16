@@ -1,3 +1,5 @@
+import Error from "components/Error/Error";
+import Loading from "components/Loading/Loading";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import GuildApiService from "services/GuildApiService";
@@ -44,16 +46,17 @@ const GuildSearchResult = ({
     };
     fetchData();
   }, [worldName, guildName]);
-  console.log(searchedGuildList);
+
+  if (!searchedGuildList) return <Loading />;
   return (
     <div className="flex flex-col">
       <div className="text-lg font-[600]">{guildName}길드 검색 결과</div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-5">
-        {searchedGuildList &&
-          searchedGuildList.map((guild) => (
+      {searchedGuildList.length > 0 ? (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-5">
+          {searchedGuildList.map((guild) => (
             <Link to={`/guildDetail/${guild.world_name}/${guild.guild_name}`}>
               <div
-                className=" min-w-[140px] px-3 py-2 rounded-sm bg-dark-200"
+                className=" min-w-[140px] px-3 py-2 rounded-sm border-[0.5px] border-dark-150 dark:border-none dark:bg-dark-200 shadow-md"
                 key={guild.guild_master_name}
               >
                 <div className="flex items-center gap-x-1">
@@ -90,7 +93,10 @@ const GuildSearchResult = ({
               </div>
             </Link>
           ))}
-      </div>
+        </div>
+      ) : (
+        <Error state="길드 이름을 다시 한 번 확인해주세요." />
+      )}
     </div>
   );
 };
