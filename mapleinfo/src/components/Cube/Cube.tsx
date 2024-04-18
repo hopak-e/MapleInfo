@@ -9,6 +9,7 @@ import CubeResultList from "./CubeResultList";
 import CubeStatement from "./CubeStatement";
 import formatNumber from "utils/formatNumber";
 import Loading from "components/Loading/Loading";
+import getApiKey from "utils/getApiKey";
 
 const Cube = () => {
   const [cubeHistory, setCubeHistory] = useState<CubeHistory[]>();
@@ -22,10 +23,12 @@ const Cube = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const apiKey = getApiKey();
         const dateRange = getDateRange(endDate, startDate);
         const resultPromises = dateRange.map(async (date) => {
           const formattedDate = formatDate(date);
           const dateRes = await CubeApiService.fetchCubeData(
+            apiKey,
             formattedDate,
             null
           );
@@ -33,6 +36,7 @@ const Cube = () => {
 
           if (dateRes.next_cursor) {
             const cursorRes = await CubeApiService.fetchCubeData(
+              apiKey,
               null,
               dateRes.next_cursor
             );

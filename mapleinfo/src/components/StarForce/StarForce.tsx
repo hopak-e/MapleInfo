@@ -7,6 +7,7 @@ import StarForceMainChar from "./StarForceMainChar";
 import StarForceStatement from "./StarForceStatement";
 import StarForceResultList from "./StarForceResultList";
 import Loading from "components/Loading/Loading";
+import getApiKey from "utils/getApiKey";
 
 const StarForce = () => {
   const [starForceHistory, setStarForceHistory] =
@@ -20,10 +21,12 @@ const StarForce = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const apiKey = getApiKey();
         const dateRange = getDateRange(endDate, startDate);
         const resultPromises = dateRange.map(async (date) => {
           const formattedDate = formatDate(date);
           const dateRes = await StarForceApiServices.fetchStarforceData(
+            apiKey,
             formattedDate,
             null
           );
@@ -31,6 +34,7 @@ const StarForce = () => {
 
           if (dateRes.next_cursor) {
             const cursorRes = await StarForceApiServices.fetchStarforceData(
+              apiKey,
               null,
               dateRes.next_cursor
             );
