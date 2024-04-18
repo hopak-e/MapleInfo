@@ -111,8 +111,8 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
                   <div className="flex flex-col justify-center items-center basis-[44px] min-h-[40px] shrink-0">
                     <img src={item.item_icon} alt={item.item_name} />
                   </div>
-                  <div className="flex flex-col overflow-hidden">
-                    <div className="inline-flex gap-x-1 text-xs ">
+                  <div className="overflow-hidden">
+                    <div className="flex gap-x-1 text-xs">
                       {item.starforce !== "0" &&
                         item.starforce !== undefined && (
                           <div
@@ -122,7 +122,7 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
                                 : "text-starforce-50"
                             } `}
                           >
-                            <span>
+                            <div>
                               <img
                                 src={
                                   item.starforce_scroll_flag === "사용"
@@ -132,8 +132,8 @@ const CharEquipmentList = ({ selectedPresetEquipment, charClass }: Props) => {
                                 alt="star"
                                 className="w-3 h-3"
                               />
-                            </span>
-                            <span className="font-[700]">{item.starforce}</span>
+                            </div>
+                            <div className="font-[700]">{item.starforce}</div>
                           </div>
                         )}
                       {item.item_add_option &&
