@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import useDarkMode, { useDark } from "hooks/useDarkMode";
 import useTabBtn, { useTab } from "hooks/useTab";
 import { Link } from "react-router-dom";
-import { ReactComponent as DarkMode } from "assets/darkmode.svg";
-import { ReactComponent as LightMode } from "assets/lightmode.svg";
+import { ReactComponent as DarkMode } from "assets/darkLightMode/darkmode.svg";
+import { ReactComponent as LightMode } from "assets/darkLightMode/lightmode.svg";
 import SearchInput from "../inputs/SearchInput";
 
 interface HeaderProps {

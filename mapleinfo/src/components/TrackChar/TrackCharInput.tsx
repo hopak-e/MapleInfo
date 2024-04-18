@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DarkSearchIcon from "assets/darkModeSearch.svg";
-import LightSearchIcon from "assets/lightModeSearch.svg";
+import DarkSearchIcon from "assets/darkLightMode/darkModeSearch.svg";
+import LightSearchIcon from "assets/darkLightMode/lightModeSearch.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "modules/index";
 

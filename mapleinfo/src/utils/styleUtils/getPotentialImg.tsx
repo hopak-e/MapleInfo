@@ -1,7 +1,7 @@
-import Rare from "assets/rare.png";
-import Epic from "assets/epic.png";
-import Unique from "assets/unique.png";
-import Legendary from "assets/legendary.png";
+import Rare from "assets/grade/rare.png";
+import Epic from "assets/grade/epic.png";
+import Unique from "assets/grade/unique.png";
+import Legendary from "assets/grade/legendary.png";
 
 const getPotentialImg = (potential: string) => {
   switch (potential) {

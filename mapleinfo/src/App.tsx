@@ -9,6 +9,7 @@ import GuildPage from "pages/GuildPage";
 import GuildDetailPage from "pages/GuildDetailPage";
 import TrackCharPage from "pages/TrackCharPage";
 import HelpPage from "pages/HelpPage";
+import Footer from "components/Footer/Footer";
 
 function App() {
   useEffect(() => {
@@ -43,6 +44,7 @@ function App() {
         <Route path="/trackChar/:nickName" element={<TrackCharPage />} />
         <Route path="/help" element={<HelpPage />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

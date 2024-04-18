@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DarkModeSearch from "assets/darkModeSearch.svg";
-import LightModeSearch from "assets/lightModeSearch.svg";
+import DarkModeSearch from "assets/darkLightMode/darkModeSearch.svg";
+import LightModeSearch from "assets/darkLightMode/lightModeSearch.svg";
 
 interface SearchInputProps {
   placeholder: string;

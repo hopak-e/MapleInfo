@@ -4,8 +4,8 @@ import { worldTypes } from "./constants";
 import downArrow from "assets/downarrow.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "modules/index";
-import DarkModeSearch from "assets/darkModeSearch.svg";
-import LightModeSearch from "assets/lightModeSearch.svg";
+import DarkModeSearch from "assets/darkLightMode/darkModeSearch.svg";
+import LightModeSearch from "assets/darkLightMode/lightModeSearch.svg";
 import useOutsideClick from "hooks/useOutsideClick";
 interface GuildInputProps {
   worldName?: string;
