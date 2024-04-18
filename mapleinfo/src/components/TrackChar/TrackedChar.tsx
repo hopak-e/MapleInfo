@@ -34,7 +34,7 @@ const TrackedChar = ({ nickName }: TrackedCharProps) => {
     };
     fetchData();
   }, [nickName]);
-  console.log(error);
+
   return (
     <div>
       <div className="border-t pt-5">{`${nickName}의 본캐 찾기 결과`}</div>

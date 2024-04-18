@@ -14,7 +14,7 @@ const CharEquipment = ({ ocid, charClass }: CharEquipmentProps) => {
   const [equipment, setEquipment] = useState<EquipmentPreset[][]>([]);
   const [equipmentPreset, setEquipmentPreset] = useState<number | undefined>();
   const [listUpType, setListUpType] = useState<string>("목록");
-  const [selectedPresetEquipment, setSelectedPressetEquipment] = useState<
+  const [selectedPresetEquipment, setSelectedPresetEquipment] = useState<
     EquipmentPreset[] | undefined
   >(undefined);
   useEffect(() => {
@@ -77,7 +77,7 @@ const CharEquipment = ({ ocid, charClass }: CharEquipmentProps) => {
 
   useEffect(() => {
     equipmentPreset &&
-      setSelectedPressetEquipment(equipment[equipmentPreset - 1]);
+      setSelectedPresetEquipment(equipment[equipmentPreset - 1]);
   }, [equipment, equipmentPreset]);
 
   return (
@@ -98,7 +98,7 @@ const CharEquipment = ({ ocid, charClass }: CharEquipmentProps) => {
             <button
               className={`w-14 py-1 rounded-full ${
                 listUpType === "목록"
-                  ? "bg-dark-150 dark:bg-dark-50"
+                  ? "bg-dark-150 dark:bg-dark-50 text-white"
                   : "bg-dark-300 dark:bg-dark-150"
               }`}
               onClick={() => handleListUpTypeButtonClick("목록")}
@@ -108,7 +108,7 @@ const CharEquipment = ({ ocid, charClass }: CharEquipmentProps) => {
             <button
               className={`w-14 py-1 rounded-full ${
                 listUpType === "장비창"
-                  ? "bg-dark-150 dark:bg-dark-50"
+                  ? "bg-dark-150 dark:bg-dark-50 text-white"
                   : "bg-dark-300 dark:bg-dark-150"
               }`}
               onClick={() => handleListUpTypeButtonClick("장비창")}

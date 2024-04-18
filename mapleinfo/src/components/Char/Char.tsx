@@ -94,7 +94,7 @@ const Char = ({ nickName }: CharProps) => {
       }
     }
   };
-  console.log(error);
+
   if (error) return <Error state={error} />;
   if (!charBasicData) return <Loading />;
   return (
