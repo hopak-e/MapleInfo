@@ -27,7 +27,7 @@ const Main = () => {
             </div>
           </div>
           <div className="max-w-[1120px] mx-auto my-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 font-[700]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 font-[700] px-4">
               <MainUserRanking />
               <MainReabootRanking />
               <MainSuroRanking />

@@ -36,7 +36,7 @@ const TrackedChar = ({ nickName }: TrackedCharProps) => {
   }, [nickName]);
 
   return (
-    <div>
+    <div className="px-4">
       <div className="border-t pt-5">{`${nickName}의 본캐 찾기 결과`}</div>
       {error ? (
         <Error state={error} />

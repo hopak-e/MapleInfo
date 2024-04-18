@@ -74,7 +74,7 @@ const GuilFirstSuroOfWolrd = () => {
 
   if (!worldSuro) return <Loading />;
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col px-4">
       <div className="text-lg font-[600]">월드별 수로 1등 길드</div>
       <div className="text-[12px] ">{`기간 ${mondayDate} ~ ${sundayDate}`}</div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-5">
