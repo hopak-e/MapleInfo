@@ -177,10 +177,10 @@ const CubeResultList = ({
                     <img
                       src={
                         history.potential_type === "잠재능력 재설정"
-                          ? require(`assets/${gradeTransToEng(
+                          ? require(`assets/grade/${gradeTransToEng(
                               history.before_potential_option[0].grade
                             )}.png`)
-                          : require(`assets/${gradeTransToEng(
+                          : require(`assets/grade/${gradeTransToEng(
                               history.before_additional_potential_option[0]
                                 .grade
                             )}.png`)
@@ -219,10 +219,10 @@ const CubeResultList = ({
                     <img
                       src={
                         history.potential_type === "잠재능력 재설정"
-                          ? require(`assets/${gradeTransToEng(
+                          ? require(`assets/grade/${gradeTransToEng(
                               history.after_potential_option[0].grade
                             )}.png`)
-                          : require(`assets/${gradeTransToEng(
+                          : require(`assets/grade/${gradeTransToEng(
                               history.after_additional_potential_option[0].grade
                             )}.png`)
                       }
