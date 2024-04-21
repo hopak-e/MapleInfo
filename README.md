@@ -16,6 +16,9 @@
 
 #### [API](https://openapi.nexon.com/game/maplestory/?id=22)
 
+## 🔧 기술 스택
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"><img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"><img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=purple">
+
 ## 🖥 구현 이미지
 ### [메인페이지1]
 - 다크모드/라이트모드/즐겨찾기 기능
@@ -65,7 +68,6 @@
 - 해당 캐릭터의 본 캐릭터(월드 내 가장 높은 레벨의 캐릭터)
 ![메이플인포 본캐찾기](https://github.com/hopak-e/MapleInfo/assets/97100045/11bbe913-9803-4ed1-a96d-4edc9220273d)
 
-## 🔧 기술 스택
 
 ## 🤙 깃 컨벤션
 
