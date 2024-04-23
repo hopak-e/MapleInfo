@@ -59,10 +59,17 @@ const GuildDetail = ({ worldName, guildName }: GuildDetailProps) => {
               guildName
             ),
           ]);
-
-          guildBasicData.fame_ranking = fameRanking.ranking[0].ranking;
-          guildBasicData.flag_ranking = flagRanking.ranking[0].ranking;
-          guildBasicData.suro_ranking = suroRanking.ranking[0].ranking;
+          console.log(guildBasicData);
+          console.log(fameRanking);
+          guildBasicData.fame_ranking = fameRanking.ranking[0]
+            ? fameRanking.ranking[0].ranking
+            : 0;
+          guildBasicData.flag_ranking = flagRanking.ranking[0]
+            ? flagRanking.ranking[0].ranking
+            : 0;
+          guildBasicData.suro_ranking = suroRanking.ranking[0]
+            ? suroRanking.ranking[0].ranking
+            : 0;
 
           const memberArr = guildBasicData.guild_member;
           const masterIndex = memberArr?.indexOf(
