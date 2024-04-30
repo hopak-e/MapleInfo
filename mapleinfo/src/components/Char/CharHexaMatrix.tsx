@@ -40,7 +40,7 @@ const CharHexaMatrix = ({ ocid }: CharHexaMatrixProps) => {
                 </div>
                 <div className="text-center font-[700]">{item.skill_level}</div>
                 {hoveredSkill === item && (
-                  <div className="absolute top-0 left-[50%] z-10 -translate-x-[50%] -translate-y-[105%] p-1 rounded-md w-[380px] border border-dark-100 dark:border-white bg-dark-100">
+                  <div className="absolute top-0 left-[50%] z-10 -translate-x-[50%] -translate-y-[105%] p-1 rounded-md w-[380px] border border-dark-100 dark:border-white bg-dark-100 text-white">
                     <div className="flex flex-col text-[11px] leading-[1.35em]">
                       <div className="text-[16px] text-center font-[700] py-2">
                         {item.skill_name}

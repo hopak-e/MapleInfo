@@ -172,7 +172,7 @@ const GuildDetail = ({ worldName, guildName }: GuildDetailProps) => {
                     <div>{item.skill_level}</div>
                     {hoveredNovel === item && (
                       <div
-                        className="absolute top-[102%] left-0 z-10 -translate-x-[50%] p-1 rounded-md w-[380px] border border-dark-100 dark:border-white bg-dark-100"
+                        className="absolute top-[102%] left-0 z-10 -translate-x-[50%] p-1 rounded-md w-[380px] border border-dark-100 dark:border-white bg-dark-100 text-white"
                         onMouseEnter={() => setHoveredNovel(null)}
                       >
                         <div className="flex flex-col text-[11px] leading-[1.35em]">
