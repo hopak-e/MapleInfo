@@ -13,11 +13,6 @@ import Footer from "components/Footer/Footer";
 
 function App() {
   useEffect(() => {
-    const favorite = localStorage.getItem("listOfFavorite");
-    if (!favorite) {
-      const data = [{ charName: "호팍팍팍팍" }, { charName: "아델" }];
-      localStorage.setItem("listOfFavorite", JSON.stringify(data));
-    }
     const apiKey = localStorage.getItem("api-key");
     if (!apiKey) {
       const data = `${process.env.REACT_APP_API_KEY}`;

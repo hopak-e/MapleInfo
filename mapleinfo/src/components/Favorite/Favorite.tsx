@@ -14,6 +14,10 @@ const Favorite = ({ path }: FavoriteProps) => {
     const favorites = localStorage.getItem("listOfFavorite");
     if (favorites) {
       setListOfFavorite(JSON.parse(favorites));
+    } else {
+      const initialData = [{ charName: "호팍팍팍팍" }, { charName: "아델" }];
+      localStorage.setItem("listOfFavorite", JSON.stringify(initialData));
+      setListOfFavorite(initialData);
     }
   }, []);
 
