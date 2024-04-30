@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import GuildApiService from "services/GuildApiService";
-import formatDate from "utils/dateUtils/formatDate";
 import { Guild } from "types/guild";
 import { Link } from "react-router-dom";
+import getLastDate from "utils/dateUtils/getLastDate";
 
 const MainSuroRanking = () => {
   const [suroRank, setSuroRank] = useState<Guild[]>();
@@ -10,7 +10,7 @@ const MainSuroRanking = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const today = formatDate(new Date());
+        const today = getLastDate(1);
 
         const suroRes = await GuildApiService.fetchRankingData(today, 2);
         const topTenSuroRes = suroRes.ranking.slice(0, 10);

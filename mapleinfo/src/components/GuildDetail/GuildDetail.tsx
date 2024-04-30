@@ -5,8 +5,9 @@ import GuildApiService from "services/GuildApiService";
 import GuildInput from "../Guild/GuildInput";
 import CharApiService from "services/CharApiService";
 import Crown from "assets/crown.svg";
-import formatDate from "utils/dateUtils/formatDate";
+
 import Loading from "components/Loading/Loading";
+import getLastDate from "utils/dateUtils/getLastDate";
 
 interface GuildDetailProps {
   worldName?: string;
@@ -25,8 +26,7 @@ const GuildDetail = ({ worldName, guildName }: GuildDetailProps) => {
   const [hoveredNovel, setHoveredNovel] = useState<GuildSkill | null>(null);
   const [memberInfo, setMemberInfo] = useState<(MemberInfo | null)[]>([]);
 
-  const today = new Date();
-  const formattedDate = formatDate(today);
+  const formattedDate = getLastDate(1);
 
   useEffect(() => {
     const fetchData = async () => {

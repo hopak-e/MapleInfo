@@ -10,22 +10,9 @@ import {
   UnionRanking,
 } from "types/char";
 import { apiInstance } from "./base";
+import getLastDate from "utils/dateUtils/getLastDate";
 
-const getCurrentDate = () => {
-  const currentDate = new Date();
-  const currentHour = currentDate.getHours();
-
-  if (currentHour <= 9) {
-    const twoDayAgo = new Date(currentDate);
-    twoDayAgo.setDate(twoDayAgo.getDate() - 2);
-    return twoDayAgo.toISOString().split("T")[0];
-  } else {
-    const oneDayAgo = new Date(currentDate);
-    oneDayAgo.setDate(oneDayAgo.getDate() - 1);
-    return oneDayAgo.toISOString().split("T")[0];
-  }
-};
-const formattedDate = getCurrentDate();
+const dates = getLastDate(2);
 
 const CharApiService = {
   fetchOcidData: async (charName: string | undefined): Promise<string> => {
@@ -43,7 +30,7 @@ const CharApiService = {
   fetchBasicData: async (ocid: string): Promise<CharBasicData> => {
     try {
       const res = await apiInstance.get<CharBasicData>(
-        `/character/basic?ocid=${ocid}&date=${formattedDate}`
+        `/character/basic?ocid=${ocid}&date=${dates}`
       );
       return res.data;
     } catch (error) {
@@ -56,7 +43,7 @@ const CharApiService = {
     try {
       const [basicRes, popularityRes, unionRes, statRes] = await Promise.all([
         apiInstance.get<CharBasicData>(
-          `/character/basic?ocid=${ocid}&date=${formattedDate}`
+          `/character/basic?ocid=${ocid}&date=${dates}`
         ),
         apiInstance.get<{ popularity: number }>(
           `/character/popularity?ocid=${ocid}`
@@ -74,14 +61,12 @@ const CharApiService = {
           : 0;
       const totalRankingRes = await apiInstance.get<{
         ranking: CharBasicData[];
-      }>(
-        `/ranking/overall?date=${formattedDate}&world_type=${worldType}&ocid=${ocid}`
-      );
+      }>(`/ranking/overall?date=${dates}&world_type=${worldType}&ocid=${ocid}`);
 
       const worldRankingRes = await apiInstance.get<{
         ranking: CharBasicData[];
       }>(
-        `/ranking/overall?date=${formattedDate}&world_name=${basicRes.data.world_name}&ocid=${ocid}`
+        `/ranking/overall?date=${dates}&world_name=${basicRes.data.world_name}&ocid=${ocid}`
       );
 
       return {
