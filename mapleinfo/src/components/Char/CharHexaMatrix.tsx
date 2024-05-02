@@ -27,7 +27,7 @@ const CharHexaMatrix = ({ ocid }: CharHexaMatrixProps) => {
       <div className="p-2">
         <div className="font-[700]">6차</div>
         {hexaMatrix && (
-          <div className="flex gap-x-2 pt-2">
+          <div className="flex flex-wrap gap-y-2 gap-x-2 pt-2">
             {hexaMatrix.map((item) => (
               <div
                 className="relative cursor-pointer border border-dark-150 dark:border-none dark:bg-dark-100 shadow-sm rounded-md"
